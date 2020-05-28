@@ -2,6 +2,11 @@ import styled, { keyframes } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import dotsImage from '../../images/dots.png';
 import backgroundImage from '../../images/homepage-bg-3.jpg';
+import {
+  snBreakpoint,
+  breakPointSm,
+  breakPointLg,
+} from '../../common/Style/global-utilities';
 import { primaryText, primaryColor } from '../../common/Style/global-color';
 
 const slideFromLeft = keyframes`
@@ -76,7 +81,10 @@ export const TopBar = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px 15px;
-  @media (min-width: 767px) {
+  @media (min-width: ${snBreakpoint(breakPointSm)}) {
+    padding: 20px 40px;
+  }
+  @media (min-width: ${snBreakpoint(breakPointLg)}) {
     padding: 20px 100px;
   }
 `;
@@ -84,22 +92,22 @@ export const LogoWrapper = styled.div`
   font-size: 20px;
   font-weight: normal;
   color: #fff;
-  @media (min-width: 767px) {
+  @media (min-width: ${snBreakpoint(breakPointSm)}) {
     font-size: 30px;
     font-weight: 500;
   }
 `;
 
-export const ActionButtons = styled.div`
+export const TopBarActionButtons = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 0px;
+  grid-gap: 10px;
   > button {
     color: #fff;
-    padding: 6px 10px;
+    padding: 3px 10px;
     &.MuiButton-contained {
-      color: #fff;
-      background-color: unset;
+      color: ${primaryColor};
+      background-color: #fff;
     }
     &.MuiButton-outlined {
       border-color: #fff;
@@ -109,14 +117,10 @@ export const ActionButtons = styled.div`
       text-transform: capitalize;
     }
   }
-  @media (min-width: 767px) {
+  @media (min-width: ${snBreakpoint(breakPointSm)}) {
     grid-gap: 20px;
     > button {
       padding: 6px 16px;
-      &.MuiButton-contained {
-        color: ${primaryColor};
-        background-color: #fff;
-      }
       span {
         font-size: 14px;
       }
@@ -135,25 +139,49 @@ export const HomePageContentWrapper = styled.div`
   .MuiTypography-root {
     animation: 800ms ease-out 0s 1 ${slideFromTop};
   }
-
   > h1 {
-    font-size: 4em;
+    font-size: 1.5em;
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin: 25px 0px 8px;
   }
+  > h5 {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: ${snBreakpoint(breakPointSm)}) {
+    > h1 {
+      font-size: 4em;
+      margin: 0px 0px 15px;
+    }
+    > h5 {
+      font-size: 1.5rem;
+    }
+  }
+`;
+
+export const ActionButtonWrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  margin-top: 30px;
   button {
-    margin-top: 70px;
+    margin-bottom: 25px;
     padding: 6px 16px;
     background-color: #fff;
     color: ${primaryColor};
     animation: 500ms ease-out 0s 1 ${slideFromBottom};
-    &:first-child {
-      margin-right: 100px;
-    }
     > span {
       text-transform: capitalize;
+    }
+  }
+  @media (min-width: ${snBreakpoint(breakPointSm)}) {
+    flex-flow: row;
+    margin-top: 70px;
+    button {
+      &:first-child {
+        margin-right: 100px;
+      }
     }
   }
 `;
@@ -163,24 +191,49 @@ export const CardsWrapper = styled.div`
   align-items: flex-start;
   color: #fff;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 40px;
   background-color: unset;
   animation: 800ms ease-out 0s 1 ${slideFromLeft};
-
+  flex-wrap: wrap;
   > div {
+    font-size: 13px;
     display: flex;
     flex-direction: column;
     align-items: center;
     flex: 1;
-    min-width: 200px;
-    margin: 0px 20px 0px 0px;
-    &:last-child {
-      margin-right: 0px;
-    }
+    min-width: 110px;
+    text-align: center;
+    margin: 0px 0px 20px 0px;
     & svg {
       margin-bottom: 15px;
       width: 35px;
       height: 35px;
+    }
+  }
+
+  @media (min-width: ${snBreakpoint(breakPointSm)}) {
+    margin-top: 50px;
+    > div {
+      font-size: 16px;
+      min-width: 170px;
+      margin: 0px 15px 40px 0px;
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+  @media (min-width: ${snBreakpoint(breakPointLg)}) {
+    > div {
+      min-width: 200px;
+      margin: 0px 20px 0px 0px;
+      padding: 18px 0px;
+      border-radius: 4px;
+      transition: transform 300ms;
+      &:hover {
+        transform: scale(1.1, 1.1);
+        color: ${primaryColor};
+        background-color: rgba(0, 0, 0, 0.2);
+      }
     }
   }
 `;

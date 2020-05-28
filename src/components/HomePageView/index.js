@@ -22,7 +22,8 @@ import {
   useStyles,
   HomePageWrapper,
   TopBar,
-  ActionButtons,
+  TopBarActionButtons,
+  ActionButtonWrapper,
   LogoWrapper,
   IframeWrapper,
   LoginRightWrapper,
@@ -56,14 +57,14 @@ export default function HomePageView() {
       <HomePageWrapper>
         <TopBar>
           <LogoWrapper>Logo</LogoWrapper>
-          <ActionButtons>
+          <TopBarActionButtons>
             <Button variant="contained" onClick={handleDrawerToggle}>
               Log In
             </Button>
             <Button variant="outlined" disableElevation>
-              Platform Demo
+              <Hidden xsDown> Platform</Hidden> Demo
             </Button>
-          </ActionButtons>
+          </TopBarActionButtons>
           <Hidden smUp>
             <Drawer
               variant="temporary"
@@ -214,7 +215,7 @@ export default function HomePageView() {
               Exhibition page
             </div>
           </CardsWrapper>
-          <div>
+          <ActionButtonWrapper>
             <Button
               variant="contained"
               disableElevation
@@ -229,7 +230,7 @@ export default function HomePageView() {
             >
               Exhibitor Registration
             </Button>
-          </div>
+          </ActionButtonWrapper>
         </HomePageContentWrapper>
       </HomePageWrapper>
     </div>
