@@ -60,8 +60,8 @@ export const HomePageWrapper = styled.div`
   justify-content: center;
   background: linear-gradient(
       to bottom,
-      rgba(41, 50, 60, 0.9) 30%,
-      rgba(82, 94, 107, 0.7)
+      rgba(41, 50, 60, 0.8) 30%,
+      rgba(82, 94, 107, 0.85)
     ),
     url(${dotsImage});
   background-repeat: no-repeat, repeat;
