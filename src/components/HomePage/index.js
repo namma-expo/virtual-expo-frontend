@@ -15,8 +15,8 @@ import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
 import WebIcon from '@material-ui/icons/Web';
 import GroupIcon from '@material-ui/icons/Group';
-import LoginComponent from '../login';
-import RegisterComponent from '../register';
+import LoginComponent from '../Login';
+import RegisterComponent from '../Register';
 import logo from '../../images/logo.png';
 import {
   useStyles,
@@ -32,7 +32,7 @@ import {
   CardsWrapper,
 } from './style.js';
 
-export default function HomePageView() {
+export default function HomePage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openRegister, setRegisterOpen] = React.useState(false);
