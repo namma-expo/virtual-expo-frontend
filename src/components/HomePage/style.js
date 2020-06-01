@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import dotsImage from '../../images/dots.png';
 import backgroundImage from '../../images/homepage-bg-3.jpg';
@@ -32,6 +32,18 @@ const slideFromBottom = keyframes`
   100% {
     transform: translateY(0);
   }
+`;
+
+const liveRippleEffect = keyframes`
+  0% {transform:scale(1); }
+  75% {transform:scale(1.75); opacity:1;}
+  100% {transform:scale(2); opacity:0;}
+`;
+
+const FlexAlignJustifyCenter = css`
+  display: flex;
+  align: items: center;
+  justify-content: center;
 `;
 
 export const IframeWrapper = styled.div`
@@ -99,6 +111,10 @@ export const LogoWrapper = styled.div`
 `;
 
 export const TopBarActionButtons = styled.div`
+  ${FlexAlignJustifyCenter};
+`;
+
+export const ActionButtonGroup = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
@@ -124,6 +140,46 @@ export const TopBarActionButtons = styled.div`
       span {
         font-size: 14px;
       }
+    }
+  }
+`;
+
+export const LiveActionButtonGroup = styled(ActionButtonGroup)`
+  margin-left: 20px;
+`;
+
+export const LiveForumIndicator = styled.div`
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: red;
+  position: relative;
+  top: 5px;
+  left: 15px;
+  transition: height 0.25s ease, width 0.25s ease;
+  transform: translate(-50%, -50%);
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 50%;
+    border: 1px solid red;
+  }
+  &:before {
+    animation: ${liveRippleEffect} 2s linear infinite;
+  }
+  &:after {
+    animation: ${liveRippleEffect} 2s linear 1s infinite;
+  }
+  &:before,
+  &:after {
+    &:hover {
+      animation: none;
     }
   }
 `;
@@ -165,6 +221,7 @@ export const ActionButtonWrapper = styled.div`
   display: flex;
   flex-flow: column;
   margin-top: 30px;
+  position: relative;
   button {
     margin-bottom: 25px;
     padding: 6px 16px;

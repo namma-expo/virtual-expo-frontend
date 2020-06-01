@@ -13,6 +13,7 @@ import ArrowRightOutlinedIcon from '@material-ui/icons/ArrowRightOutlined';
 import AspectRatioIcon from '@material-ui/icons/AspectRatio';
 import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 import WebIcon from '@material-ui/icons/Web';
 import GroupIcon from '@material-ui/icons/Group';
 import LoginComponent from '../Login';
@@ -23,7 +24,10 @@ import {
   HomePageWrapper,
   TopBar,
   TopBarActionButtons,
+  ActionButtonGroup,
   ActionButtonWrapper,
+  LiveActionButtonGroup,
+  LiveForumIndicator,
   LogoWrapper,
   IframeWrapper,
   LoginRightWrapper,
@@ -58,12 +62,22 @@ export default function HomePage() {
         <TopBar>
           <LogoWrapper>Logo</LogoWrapper>
           <TopBarActionButtons>
-            <Button variant="contained" onClick={handleDrawerToggle}>
-              Log In
-            </Button>
-            <Button variant="outlined" disableElevation>
-              <Hidden xsDown> Platform</Hidden> Demo
-            </Button>
+            <ActionButtonGroup>
+              <Button variant="contained" onClick={handleDrawerToggle}>
+                Log In
+              </Button>
+              <Button variant="outlined" disableElevation>
+                <Hidden xsDown> Platform</Hidden> Demo
+              </Button>
+            </ActionButtonGroup>
+            {/* <LiveActionButtonGroup>
+              <Button variant="contained" onClick={handleDrawerToggle}>
+                <EventNoteIcon />
+              </Button>
+              <Button variant="contained" onClick={handleDrawerToggle}>
+                Live<LiveForumIndicator></LiveForumIndicator>
+              </Button>
+            </LiveActionButtonGroup> */}
           </TopBarActionButtons>
           <Hidden smUp>
             <Drawer
