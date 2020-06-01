@@ -18,6 +18,7 @@ import WebIcon from '@material-ui/icons/Web';
 import GroupIcon from '@material-ui/icons/Group';
 import LoginComponent from '../Login';
 import RegisterComponent from '../Register';
+import AgendaDrawer from '../../common/AgendaDrawer';
 import logo from '../../images/logo.png';
 import {
   useStyles,
@@ -50,6 +51,7 @@ export default function HomePage() {
 
   return (
     <div>
+      <AgendaDrawer />
       <IframeWrapper>
         <iframe
           width="100%"
