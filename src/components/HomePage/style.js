@@ -372,4 +372,23 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '13px',
     },
   },
+  dialogDemoVideoWrapper: {
+    '& .MuiDialog-paper': {
+      width: '900px',
+      maxWidth: '100%',
+      height: 'auto',
+      overflow: 'hidden',
+    },
+    [theme.breakpoints.down('md')]: {
+      '& .MuiDialog-paper': {
+        width: '650px',
+        margin: '20px 10px',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& .MuiDialog-paper': {
+        width: '100%',
+      },
+    },
+  },
 }));

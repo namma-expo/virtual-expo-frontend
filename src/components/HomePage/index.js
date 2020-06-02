@@ -1,4 +1,5 @@
 import React from 'react';
+import { Player, BigPlayButton } from 'video-react';
 import {
   Button,
   Drawer,
@@ -41,12 +42,16 @@ export default function HomePage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openRegister, setRegisterOpen] = React.useState(false);
+  const [openDemoVideo, setDemoVideo] = React.useState(false);
 
   function handleDrawerToggle() {
     setOpen(!open);
   }
   function handleRegistrationDrawerToggle() {
     setRegisterOpen(!openRegister);
+  }
+  function handleDemoVideDrawerToggle() {
+    setDemoVideo(!openDemoVideo);
   }
 
   return (
@@ -60,6 +65,7 @@ export default function HomePage() {
           src="https://momento360.com/e/u/29c5330ec79048479c878633371728b8?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=100"
         ></iframe>
       </IframeWrapper>
+
       <HomePageWrapper>
         <TopBar>
           <LogoWrapper>Logo</LogoWrapper>
@@ -68,9 +74,24 @@ export default function HomePage() {
               <Button variant="contained" onClick={handleDrawerToggle}>
                 Log In
               </Button>
-              <Button variant="outlined" disableElevation>
+              <Button
+                variant="outlined"
+                disableElevation
+                onClick={handleDemoVideDrawerToggle}
+              >
                 <Hidden xsDown> Platform</Hidden> Demo
               </Button>
+              <Dialog
+                onClose={handleDemoVideDrawerToggle}
+                aria-labelledby="simple-dialog-title"
+                open={openDemoVideo}
+                className={classes.dialogDemoVideoWrapper}
+              >
+                <Player autoPlay={true}>
+                  <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                  <BigPlayButton position="center" />
+                </Player>
+              </Dialog>
             </ActionButtonGroup>
             {/* <LiveActionButtonGroup>
               <Button variant="contained" onClick={handleDrawerToggle}>
