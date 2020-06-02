@@ -17,10 +17,10 @@ import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import WebIcon from '@material-ui/icons/Web';
 import GroupIcon from '@material-ui/icons/Group';
+import AgendaDrawer from 'common/AgendaDrawer';
+import logo from 'images/logo.png';
 import LoginComponent from '../Login';
 import RegisterComponent from '../Register';
-import AgendaDrawer from '../../common/AgendaDrawer';
-import logo from '../../images/logo.png';
 import {
   useStyles,
   HomePageWrapper,

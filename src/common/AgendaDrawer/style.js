@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import { primaryColor } from '../Style/global-color';
-import { scrollBar } from '../Style/global-utilities';
+import { primaryColor } from 'common/Style/global-color';
+import { scrollBar } from 'common/Style/global-utilities';
 
 export const AgendaFloatingButton = styled.div`
   position: fixed;

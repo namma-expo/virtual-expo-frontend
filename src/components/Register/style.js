@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import { primaryColor } from '../../common/Style/global-color';
+import { primaryColor } from 'common/Style/global-color';
 
 export const DrawerWrapper = styled.div`
   padding: 30px 20px;
