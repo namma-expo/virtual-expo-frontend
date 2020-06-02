@@ -1,8 +1,8 @@
 import React from 'react';
 import EventNoteOutlinedIcon from '@material-ui/icons/EventNoteOutlined';
 import { Button, Drawer, Typography } from '@material-ui/core';
-import image1 from '../../images/agenda1.jpg';
-import image2 from '../../images/agenda2.jpg';
+import image1 from 'images/agenda1.jpg';
+import image2 from 'images/agenda2.jpg';
 import {
   useStyles,
   AgendaFloatingButton,

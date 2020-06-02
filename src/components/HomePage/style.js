@@ -1,13 +1,13 @@
 import styled, { keyframes, css } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import dotsImage from '../../images/dots.png';
-import backgroundImage from '../../images/homepage-bg-3.jpg';
+import dotsImage from 'images/dots.png';
+import backgroundImage from 'images/homepage-bg-3.jpg';
 import {
   snBreakpoint,
   breakPointSm,
   breakPointLg,
-} from '../../common/Style/global-utilities';
-import { primaryText, primaryColor } from '../../common/Style/global-color';
+} from 'common/Style/global-utilities';
+import { primaryText, primaryColor } from 'common/Style/global-color';
 
 const slideFromLeft = keyframes`
   0% {
