@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, TextField, InputAdornment } from '@material-ui/core';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { AuthContext } from 'common/Authentication/index.js';
+import { useForm } from 'react-hook-form';
 import {
   useStyles,
   DrawerWrapper,
@@ -12,18 +14,27 @@ import {
 
 export default function Login() {
   const classes = useStyles();
+  const { authenticate } = React.useContext(AuthContext);
+  const { register, handleSubmit } = useForm();
   return (
-    <DrawerWrapper>
-      <DrawerTitle>Welcome Back</DrawerTitle>
-      <DrawerSubTitle>Sign in to continue</DrawerSubTitle>
-
-      <form className={classes.formWrapper} noValidate autoComplete="off">
+    <form
+      className={classes.formWrapper}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit((data) => {
+        authenticate(data.userName, data.password);
+      })}
+    >
+      <DrawerWrapper>
+        <DrawerTitle>Welcome Back</DrawerTitle>
+        <DrawerSubTitle>Sign in to continue</DrawerSubTitle>
         <div>
           <TextField
             required
+            name="userName"
             id="standard-required"
             label="Email"
-            placeholder="Hello@hello.com"
+            placeholder="Enter your email"
             fullWidth
             InputProps={{
               startAdornment: (
@@ -32,10 +43,12 @@ export default function Login() {
                 </InputAdornment>
               ),
             }}
+            inputRef={register}
           />
           <TextField
             required
             id="standard-password-input"
+            name="password"
             label="Password"
             type="password"
             autoComplete="current-password"
@@ -47,24 +60,26 @@ export default function Login() {
                 </InputAdornment>
               ),
             }}
+            inputRef={register({ required: true })}
           />
         </div>
-      </form>
-      <Button
-        fullWidth
-        variant="contained"
-        className={classes.drawerActionBtn}
-        disableElevation
-      >
-        Log in
-      </Button>
-      <Button fullWidth className={classes.forgotPassBtn}>
-        Forgot password?
-      </Button>
-      <RegisterLink>
-        Don't have an account <span></span>
-        <Button className={classes.registerLinkBtn}>Register Now</Button>
-      </RegisterLink>
-    </DrawerWrapper>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          className={classes.drawerActionBtn}
+          disableElevation
+        >
+          Log in
+        </Button>
+        <Button fullWidth className={classes.forgotPassBtn}>
+          Forgot password?
+        </Button>
+        <RegisterLink>
+          Don't have an account <span></span>
+          <Button className={classes.registerLinkBtn}>Register Now</Button>
+        </RegisterLink>
+      </DrawerWrapper>
+    </form>
   );
 }
