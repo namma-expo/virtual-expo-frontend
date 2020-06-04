@@ -7,7 +7,7 @@ import {
   breakPointSm,
   breakPointLg,
 } from 'common/Style/global-utilities';
-import { primaryText, primaryColor } from 'common/Style/global-color';
+import { primaryDarkText, primaryColor } from 'common/Style/global-color';
 
 const slideFromLeft = keyframes`
   0% {
@@ -58,7 +58,7 @@ export const IframeWrapper = styled.div`
 
 export const Title = styled.h1`
   font-size: 45px;
-  color: ${primaryText};
+  color: ${primaryDarkText};
   text-align: center;
 `;
 
