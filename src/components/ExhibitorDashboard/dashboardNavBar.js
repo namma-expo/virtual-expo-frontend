@@ -21,6 +21,7 @@ import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import GroupAddOutlinedIcon from '@material-ui/icons/GroupAddOutlined';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import FormatListBulletedOutlinedIcon from '@material-ui/icons/FormatListBulletedOutlined';
 import { useStyles, HamburgerMenuWrapper, ProfileDetails } from './style';
 
@@ -112,6 +113,10 @@ export default function DashboardNavBar(props) {
           <ListItem button className={classes.navItemStyle}>
             <TextsmsOutlinedIcon />
             <ListItemText primary="Chat" />
+          </ListItem>
+          <ListItem button className={classes.navItemStyle}>
+            <AttachMoneyIcon />
+            <ListItemText primary="Pricing" />
           </ListItem>
           <ListItem button className={classes.navItemStyle}>
             <FormatListBulletedOutlinedIcon />
