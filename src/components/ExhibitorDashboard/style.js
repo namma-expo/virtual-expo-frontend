@@ -1,10 +1,14 @@
 import styled, { css } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import {
+  primaryLightText,
   primaryLightColor,
+  primaryBorderColor,
+  primarySectionBackground,
   secondarySectionBackground,
+  primaryIconColor,
 } from 'common/Style/global-color';
-import { snBreakpoint, breakPointSm } from 'common/Style/global-utilities';
+import { snBreakpoint, breakPointMuiSm } from 'common/Style/global-utilities';
 
 const FlexAlignJustifyCenter = css`
   display: flex;
@@ -17,38 +21,50 @@ export const DashboardWrapper = styled.div`
   min-height: 100vh;
   height: auto;
   margin: 0px;
-  padding: 0px 0px 0px 65px;
+  padding: 15px 15px 65px;
+
   background-color: ${secondarySectionBackground};
+  @media (min-width: ${snBreakpoint(breakPointMuiSm)}) {
+    padding: 0px 0px 0px 65px;
+  }
 `;
 
 export const DashboardContentWrapper = styled.div`
-  padding: 20px 50px 40px;
+  padding: 0px;
+  @media (min-width: ${snBreakpoint(breakPointMuiSm)}) {
+    padding: 20px 50px 40px;
+  }
 `;
 
 export const HamburgerMenuWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 59px;
-  width: 100%;
-  padding: 8px 10px;
   margin: 0px;
-  background-color: #04244a;
-  button,
-  a {
-    margin-right: 7px;
-    color: ${primaryLightColor};
-  }
-  @media (max-width: ${snBreakpoint(breakPointSm)}) {
-    width: auto;
-    height: 56px;
+  background-color: ${secondarySectionBackground};
+  button {
     margin: 0px;
-    padding: 0px;
+    padding: 15px;
+    color: ${primaryIconColor};
+  }
+
+  @media (min-width: ${snBreakpoint(breakPointMuiSm)}) {
+    display: flex;
+    flex-direction: column;
+    min-height: 59px;
+    width: 100%;
+    padding: 8px 10px;
+    margin: 0px;
+    background-color: #04244a;
+    button,
+    a {
+      margin-right: 7px;
+      padding: 12px;
+      color: ${primaryLightText};
+    }
   }
 `;
 
 export const ProfileDetails = styled.div`
   text-align: center;
-  color: ${primaryLightColor};
+  color: ${primaryLightText};
   margin: 15px 0px;
   h6 {
     font-size: 15px;
@@ -59,7 +75,27 @@ export const ProfileDetails = styled.div`
   }
 `;
 
-const MobileNavDrawer = 280;
+export const HorizontalNavLinkWrapper = styled.div`
+  flex: 1;
+`;
+
+export const MobileNavDrawerHeader = styled.div`
+  min-height: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  padding: 0px 16px 0px 18px;
+  justify-content: space-between;
+  background-color: ${primarySectionBackground};
+  border-bottom: 1px solid ${primaryBorderColor};
+`;
+
+export const MobileNavDrawerItemsWrapper = styled.div`
+  height: calc(100% - 55px);
+  max-height: 100%;
+  overflow-x: auto;
+`;
+
 const drawerWidth = 245;
 export const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -95,14 +131,28 @@ export const useStyles = makeStyles((theme) => ({
     '& svg': {
       width: '22px',
       height: '22px',
-      margin: '0px 22px 0px 4px',
+      margin: '0px 0px 0px 5px',
+    },
+    '& >div': {
+      margin: '0px 4px 0px 22px',
     },
     '& span': {
       fontSize: '14px',
     },
+    [theme.breakpoints.down('xs')]: {
+      color: primaryIconColor,
+      '& svg': {
+        width: '20px',
+        height: '20px',
+        margin: '0px',
+      },
+    },
   },
   nestedListWrapper: {
     backgroundColor: '#0c376b',
+    [theme.breakpoints.down('xs')]: {
+      backgroundColor: primaryLightText,
+    },
   },
   nestedListItems: {
     padding: '8px 10px 8px 64px',
@@ -110,5 +160,33 @@ export const useStyles = makeStyles((theme) => ({
     '& span': {
       fontSize: '14px',
     },
+    [theme.breakpoints.down('xs')]: {
+      color: primaryIconColor,
+    },
+  },
+  mobileAppBar: {
+    height: '55px',
+    top: 'auto',
+    bottom: '0px',
+    padding: '0px',
+    margin: '0px',
+    position: 'fixed',
+    backgroundColor: secondarySectionBackground,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    boxShadow:
+      '0 -2px 4px -1px rgba(0, 0, 0, 0.07), 0 -1px 10px 0 rgba(0, 0,0, 0.08)',
+  },
+  mobileDrawerPaper: {
+    width: '100%',
+    maxHeight: '450px',
+    borderTopLeftRadius: '10px',
+    borderTopRightRadius: '10px',
+    backgroundColor: secondarySectionBackground,
+  },
+
+  closeBtn: {
+    padding: '0px',
   },
 }));

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import {
+  Hidden,
+  AppBar,
   Drawer,
   IconButton,
   List,
@@ -23,12 +25,20 @@ import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import FormatListBulletedOutlinedIcon from '@material-ui/icons/FormatListBulletedOutlined';
-import { useStyles, HamburgerMenuWrapper, ProfileDetails } from './style';
+import {
+  useStyles,
+  HamburgerMenuWrapper,
+  ProfileDetails,
+  HorizontalNavLinkWrapper,
+  MobileNavDrawerHeader,
+  MobileNavDrawerItemsWrapper,
+} from './style';
 
 export default function DashboardNavBar(props) {
   const classes = useStyles();
   const [isDesktopDrawerOpen, setDesktopDrawerOpen] = React.useState(false);
   const [openNestedNav, setNestedNavOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
   function handleDesktopDrawerToggle() {
     setDesktopDrawerOpen(!isDesktopDrawerOpen);
@@ -38,100 +48,236 @@ export default function DashboardNavBar(props) {
     setNestedNavOpen(!openNestedNav);
   };
 
+  function handleMobileDrawerToggle() {
+    setMobileOpen(!mobileOpen);
+  }
+
   return (
-    <div mdDown implementation="css">
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: isDesktopDrawerOpen,
-          [classes.drawerClose]: !isDesktopDrawerOpen,
-        })}
-        classes={{
-          paper: clsx(
-            {
-              [classes.drawerOpen]: isDesktopDrawerOpen,
-              [classes.drawerClose]: !isDesktopDrawerOpen,
-            },
-            classes.desktopDrawerWrapper,
-          ),
-        }}
-        open={isDesktopDrawerOpen}
-      >
-        <HamburgerMenuWrapper>
-          <div>
+    <React.Fragment>
+      {/* Mobile NavBar */}
+      <Hidden smUp>
+        <AppBar position="fixed" className={classes.mobileAppBar}>
+          {/* Mobile horizontal bottom menu bar */}
+          <HorizontalNavLinkWrapper></HorizontalNavLinkWrapper>
+          <HamburgerMenuWrapper>
             <IconButton
-              aria-label={isDesktopDrawerOpen ? 'close drawer' : 'open drawer'}
-              onClick={handleDesktopDrawerToggle}
-              className={classes.menuButtonDesktop}
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleMobileDrawerToggle}
+              className={classes.mobileHamburgerButton}
             >
-              {isDesktopDrawerOpen ? <CloseIcon /> : <MenuIcon />}
+              <MenuIcon />
             </IconButton>
+          </HamburgerMenuWrapper>
+        </AppBar>
+        <Drawer
+          variant="temporary"
+          anchor="bottom"
+          open={mobileOpen}
+          onClose={handleMobileDrawerToggle}
+          classes={{
+            paper: classes.mobileDrawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <MobileNavDrawerHeader>
             <NavLink to={'/home'}>Logo</NavLink>
-          </div>
-          {isDesktopDrawerOpen && (
-            <ProfileDetails>
-              <Typography variant="h6">Madhukar</Typography>
-              <Typography variant="body1" noWrap>
-                madhukar@gmail.com
-              </Typography>
-            </ProfileDetails>
-          )}
-        </HamburgerMenuWrapper>
-        <List disablePadding>
-          <ListItem
-            button
-            onClick={handleNestedNavItemsClick}
-            className={classes.navItemStyle}
-          >
-            <DashboardOutlinedIcon />
-            <ListItemText primary="Page Layouts" />
-            {openNestedNav ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
-            <List component="div" className={classes.nestedListWrapper}>
-              <ListItem button className={classes.nestedListItems}>
-                <ListItemText primary="Hero Section" />
+            <IconButton
+              aria-label="close"
+              onClick={handleMobileDrawerToggle}
+              className={classes.closeBtn}
+            >
+              <CloseIcon />
+            </IconButton>
+          </MobileNavDrawerHeader>
+          <MobileNavDrawerItemsWrapper>
+            <List disablePadding>
+              <ListItem
+                button
+                onClick={handleNestedNavItemsClick}
+                className={classes.navItemStyle}
+              >
+                <DashboardOutlinedIcon />
+                <ListItemText primary="Page Layouts" />
+                {openNestedNav ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
-              <ListItem button className={classes.nestedListItems}>
-                <ListItemText primary="Section 1" />
+              <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
+                <List component="div" className={classes.nestedListWrapper}>
+                  <ListItem button className={classes.nestedListItems}>
+                    <ListItemText primary="Hero Section" />
+                  </ListItem>
+                  <ListItem button className={classes.nestedListItems}>
+                    <ListItemText primary="Section 1" />
+                  </ListItem>
+                  <ListItem button className={classes.nestedListItems}>
+                    <ListItemText primary="Section 2" />
+                  </ListItem>
+                  <ListItem button className={classes.nestedListItems}>
+                    <ListItemText primary="Section 3" />
+                  </ListItem>
+                  <ListItem button className={classes.nestedListItems}>
+                    <ListItemText primary="Section 4" />
+                  </ListItem>
+                </List>
+              </Collapse>
+              <ListItem button className={classes.navItemStyle}>
+                <GroupAddOutlinedIcon />
+                <ListItemText primary="Contacts" />
               </ListItem>
-              <ListItem button className={classes.nestedListItems}>
-                <ListItemText primary="Section 2" />
+              <ListItem button className={classes.navItemStyle}>
+                <TextsmsOutlinedIcon />
+                <ListItemText primary="Chat" />
               </ListItem>
-              <ListItem button className={classes.nestedListItems}>
-                <ListItemText primary="Section 3" />
+              <ListItem button className={classes.navItemStyle}>
+                <AttachMoneyIcon />
+                <ListItemText primary="Pricing" />
               </ListItem>
-              <ListItem button className={classes.nestedListItems}>
-                <ListItemText primary="Section 4" />
+              <ListItem button className={classes.navItemStyle}>
+                <FormatListBulletedOutlinedIcon />
+                <ListItemText primary="Event Agenda" />
               </ListItem>
+              <ListItem button className={classes.navItemStyle}>
+                <BarChartOutlinedIcon />
+                <ListItemText primary="Analytics" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={handleNestedNavItemsClick}
+                className={classes.navItemStyle}
+              >
+                <AccountBoxOutlinedIcon />
+                <ListItemText primary="Profile" />
+                {openNestedNav ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
+                <List component="div" className={classes.nestedListWrapper}>
+                  <ListItem button className={classes.nestedListItems}>
+                    <ListItemText primary="Account" />
+                  </ListItem>
+                  <ListItem button className={classes.nestedListItems}>
+                    <ListItemText primary="Logout" />
+                  </ListItem>
+                </List>
+              </Collapse>
             </List>
-          </Collapse>
-          <ListItem button className={classes.navItemStyle}>
-            <GroupAddOutlinedIcon />
-            <ListItemText primary="Contacts" />
-          </ListItem>
-          <ListItem button className={classes.navItemStyle}>
-            <TextsmsOutlinedIcon />
-            <ListItemText primary="Chat" />
-          </ListItem>
-          <ListItem button className={classes.navItemStyle}>
-            <AttachMoneyIcon />
-            <ListItemText primary="Pricing" />
-          </ListItem>
-          <ListItem button className={classes.navItemStyle}>
-            <FormatListBulletedOutlinedIcon />
-            <ListItemText primary="Event Agenda" />
-          </ListItem>
-          <ListItem button className={classes.navItemStyle}>
-            <BarChartOutlinedIcon />
-            <ListItemText primary="Analytics" />
-          </ListItem>
-          <ListItem button className={classes.navItemStyle}>
-            <AccountBoxOutlinedIcon />
-            <ListItemText primary="Profile" />
-          </ListItem>
-        </List>
-      </Drawer>
-    </div>
+          </MobileNavDrawerItemsWrapper>
+        </Drawer>
+      </Hidden>
+
+      {/* Desktop NavBar */}
+      <Hidden xsDown>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
+            [classes.drawerOpen]: isDesktopDrawerOpen,
+            [classes.drawerClose]: !isDesktopDrawerOpen,
+          })}
+          classes={{
+            paper: clsx(
+              {
+                [classes.drawerOpen]: isDesktopDrawerOpen,
+                [classes.drawerClose]: !isDesktopDrawerOpen,
+              },
+              classes.desktopDrawerWrapper,
+            ),
+          }}
+          open={isDesktopDrawerOpen}
+        >
+          <HamburgerMenuWrapper>
+            <div>
+              <IconButton
+                aria-label={
+                  isDesktopDrawerOpen ? 'close drawer' : 'open drawer'
+                }
+                onClick={handleDesktopDrawerToggle}
+                className={classes.menuButtonDesktop}
+              >
+                {isDesktopDrawerOpen ? <CloseIcon /> : <MenuIcon />}
+              </IconButton>
+              <NavLink to={'/home'}>Logo</NavLink>
+            </div>
+            {isDesktopDrawerOpen && (
+              <ProfileDetails>
+                <Typography variant="h6">Madhukar</Typography>
+                <Typography variant="body1" noWrap>
+                  madhukar@gmail.com
+                </Typography>
+              </ProfileDetails>
+            )}
+          </HamburgerMenuWrapper>
+          <List disablePadding>
+            <ListItem
+              button
+              onClick={handleNestedNavItemsClick}
+              className={classes.navItemStyle}
+            >
+              <DashboardOutlinedIcon />
+              <ListItemText primary="Page Layouts" />
+              {openNestedNav ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
+              <List component="div" className={classes.nestedListWrapper}>
+                <ListItem button className={classes.nestedListItems}>
+                  <ListItemText primary="Hero Section" />
+                </ListItem>
+                <ListItem button className={classes.nestedListItems}>
+                  <ListItemText primary="Section 1" />
+                </ListItem>
+                <ListItem button className={classes.nestedListItems}>
+                  <ListItemText primary="Section 2" />
+                </ListItem>
+                <ListItem button className={classes.nestedListItems}>
+                  <ListItemText primary="Section 3" />
+                </ListItem>
+                <ListItem button className={classes.nestedListItems}>
+                  <ListItemText primary="Section 4" />
+                </ListItem>
+              </List>
+            </Collapse>
+            <ListItem button className={classes.navItemStyle}>
+              <GroupAddOutlinedIcon />
+              <ListItemText primary="Contacts" />
+            </ListItem>
+            <ListItem button className={classes.navItemStyle}>
+              <TextsmsOutlinedIcon />
+              <ListItemText primary="Chat" />
+            </ListItem>
+            <ListItem button className={classes.navItemStyle}>
+              <AttachMoneyIcon />
+              <ListItemText primary="Pricing" />
+            </ListItem>
+            <ListItem button className={classes.navItemStyle}>
+              <FormatListBulletedOutlinedIcon />
+              <ListItemText primary="Event Agenda" />
+            </ListItem>
+            <ListItem button className={classes.navItemStyle}>
+              <BarChartOutlinedIcon />
+              <ListItemText primary="Analytics" />
+            </ListItem>
+            <ListItem
+              button
+              onClick={handleNestedNavItemsClick}
+              className={classes.navItemStyle}
+            >
+              <AccountBoxOutlinedIcon />
+              <ListItemText primary="Profile" />
+              {openNestedNav ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
+              <List component="div" className={classes.nestedListWrapper}>
+                <ListItem button className={classes.nestedListItems}>
+                  <ListItemText primary="Account" />
+                </ListItem>
+                <ListItem button className={classes.nestedListItems}>
+                  <ListItemText primary="Logout" />
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
+        </Drawer>
+      </Hidden>
+    </React.Fragment>
   );
 }

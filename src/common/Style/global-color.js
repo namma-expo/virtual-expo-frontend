@@ -6,3 +6,4 @@ export const primaryLightText = '#fff';
 export const primarySectionBackground = '#fff';
 export const secondarySectionBackground = '#f5f5f5';
 export const primaryIconColor = 'rgba(0, 0, 0, 0.75)';
+export const primaryBorderColor = '#9e9e9e';
