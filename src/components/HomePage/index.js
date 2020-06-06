@@ -41,15 +41,15 @@ export default function HomePage({ isLoginOpen = false }) {
   const [openRegister, setRegisterOpen] = React.useState(false);
   const [openDemoVideo, setDemoVideo] = React.useState(false);
 
-  function handleDrawerToggle() {
+  const handleDrawerToggle = () => {
     setOpen(!open);
-  }
-  function handleRegistrationDrawerToggle() {
+  };
+  const handleRegistrationDrawerToggle = () => {
     setRegisterOpen(!openRegister);
-  }
-  function handleDemoVideDrawerToggle() {
+  };
+  const handleDemoVideDrawerToggle = () => {
     setDemoVideo(!openDemoVideo);
-  }
+  };
 
   return (
     <div>

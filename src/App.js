@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import HomePage from 'components/HomePage';
 import DashboardPage from 'components/Dashboard';
-import { ProtectedRoute } from 'common/AppRouters';
+import { ProtectedRoute, NoUserRoute } from 'common/AppRouters';
 import { AuthProvider } from 'common/Authentication';
 
 export default function App() {
@@ -11,12 +11,7 @@ export default function App() {
       <Router>
         <div>
           <Switch>
-            <Route path="/" exact component={HomePage} />
-            <Route
-              path="/login"
-              exact
-              render={() => <HomePage isLoginOpen={true} />}
-            />
+            <NoUserRoute path="/" exact component={HomePage} />
             <ProtectedRoute path="/dashboard" component={DashboardPage} />
           </Switch>
         </div>

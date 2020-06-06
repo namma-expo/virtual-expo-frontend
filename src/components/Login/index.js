@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, TextField, InputAdornment } from '@material-ui/core';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -14,15 +14,14 @@ import {
 
 export default function Login() {
   const classes = useStyles();
-  const { authenticate } = React.useContext(AuthContext);
+  const { authUserSignIn } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   return (
     <form
       className={classes.formWrapper}
-      noValidate
       autoComplete="off"
       onSubmit={handleSubmit((data) => {
-        authenticate(data.userName, data.password);
+        authUserSignIn({ userName: data.userName, password: data.password });
       })}
     >
       <DrawerWrapper>
@@ -33,8 +32,8 @@ export default function Login() {
             required
             name="userName"
             id="standard-required"
-            label="Email"
-            placeholder="Enter your email"
+            label="User Name"
+            placeholder="Enter your user name"
             fullWidth
             InputProps={{
               startAdornment: (
@@ -43,7 +42,7 @@ export default function Login() {
                 </InputAdornment>
               ),
             }}
-            inputRef={register}
+            inputRef={register({ required: true })}
           />
           <TextField
             required
