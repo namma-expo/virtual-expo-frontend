@@ -16,7 +16,7 @@ import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
 import WebIcon from '@material-ui/icons/Web';
 import GroupIcon from '@material-ui/icons/Group';
-import AgendaDrawer from 'common/AgendaDrawer';
+import AgendaDrawer from 'components/AgendaDrawer';
 import logo from 'images/logo.png';
 import LoginComponent from '../Login';
 import RegisterComponent from '../Register';
