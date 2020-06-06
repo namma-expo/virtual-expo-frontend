@@ -55,3 +55,18 @@ export const RowSection = styled.div`
     padding: 50px 9%;
   }
 `;
+
+// Exhibitor dashboard global style
+
+export const ExhibitorDashboardWrapper = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  margin: 0px;
+  padding: 15px 15px 65px;
+
+  background-color: ${secondarySectionBackground};
+  @media (min-width: ${snBreakpoint(breakPointMuiSm)}) {
+    padding: 0px 0px 0px 65px;
+  }
+`;

@@ -1,12 +1,13 @@
 import React from 'react';
 import NavBar from './dashboardNavBar';
-import { DashboardWrapper, DashboardContentWrapper } from './style';
+import { ExhibitorDashboardWrapper } from 'common/Style/global-style';
+import ExhibitorContacts from '../ExhibitorContacts';
 
 export default function DashboardPage() {
   return (
-    <DashboardWrapper>
+    <ExhibitorDashboardWrapper>
       <NavBar />
-      <DashboardContentWrapper>data</DashboardContentWrapper>
-    </DashboardWrapper>
+      <ExhibitorContacts />
+    </ExhibitorDashboardWrapper>
   );
 }

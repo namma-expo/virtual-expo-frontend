@@ -16,26 +16,6 @@ const FlexAlignJustifyCenter = css`
   justify-content: center;
 `;
 
-export const DashboardWrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-  margin: 0px;
-  padding: 15px 15px 65px;
-
-  background-color: ${secondarySectionBackground};
-  @media (min-width: ${snBreakpoint(breakPointMuiSm)}) {
-    padding: 0px 0px 0px 65px;
-  }
-`;
-
-export const DashboardContentWrapper = styled.div`
-  padding: 0px;
-  @media (min-width: ${snBreakpoint(breakPointMuiSm)}) {
-    padding: 20px 50px 40px;
-  }
-`;
-
 export const HamburgerMenuWrapper = styled.div`
   margin: 0px;
   background-color: ${secondarySectionBackground};
