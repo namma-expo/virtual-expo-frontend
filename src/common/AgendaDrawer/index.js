@@ -18,9 +18,10 @@ export default function AgendaButton(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  function handleAgendaDrawerToggle() {
+  const handleAgendaDrawerToggle = () => {
     setOpen(!open);
-  }
+  };
+
   return (
     <AgendaFloatingButton>
       <Button color={props.color} onClick={handleAgendaDrawerToggle}>
@@ -48,7 +49,7 @@ export default function AgendaButton(props) {
               <Typography className={classes.cardHeading}>
                 Panel Discussion
               </Typography>
-              <Typography className={classes.cardContent} Wrap>
+              <Typography className={classes.cardContent} noWrap={false}>
                 The Vitality of Design for Shopper Engagement in Service Retail
               </Typography>
             </ContentWrapper>
@@ -63,7 +64,7 @@ export default function AgendaButton(props) {
             </ImageWrapper>
             <ContentWrapper>
               <Typography className={classes.cardHeading}>Debate</Typography>
-              <Typography className={classes.cardContent} Wrap>
+              <Typography className={classes.cardContent} noWrap={false}>
                 Human Vs. Digital : What’s more Important in a Rollout Project
               </Typography>
             </ContentWrapper>
@@ -80,7 +81,7 @@ export default function AgendaButton(props) {
               <Typography className={classes.cardHeading}>
                 Panel Discussion
               </Typography>
-              <Typography className={classes.cardContent} Wrap>
+              <Typography className={classes.cardContent} noWrap={false}>
                 The Vitality of Design for Shopper Engagement in Service Retail
               </Typography>
             </ContentWrapper>
@@ -97,7 +98,7 @@ export default function AgendaButton(props) {
               <Typography className={classes.cardHeading}>
                 Panel Discussion
               </Typography>
-              <Typography className={classes.cardContent} Wrap>
+              <Typography className={classes.cardContent} noWrap={false}>
                 3 Young Disruptors of Retailing Lifestyle
               </Typography>
             </ContentWrapper>
@@ -114,7 +115,7 @@ export default function AgendaButton(props) {
               <Typography className={classes.cardHeading}>
                 Panel Discussion
               </Typography>
-              <Typography className={classes.cardContent} Wrap>
+              <Typography className={classes.cardContent} noWrap={false}>
                 The Vitality of Design for Shopper Engagement in Service Retail
               </Typography>
             </ContentWrapper>

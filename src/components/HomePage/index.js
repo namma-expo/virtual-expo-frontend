@@ -14,7 +14,6 @@ import ArrowRightOutlinedIcon from '@material-ui/icons/ArrowRightOutlined';
 import AspectRatioIcon from '@material-ui/icons/AspectRatio';
 import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
-import EventNoteIcon from '@material-ui/icons/EventNote';
 import WebIcon from '@material-ui/icons/Web';
 import GroupIcon from '@material-ui/icons/Group';
 import AgendaDrawer from 'common/AgendaDrawer';
@@ -28,8 +27,6 @@ import {
   TopBarActionButtons,
   ActionButtonGroup,
   ActionButtonWrapper,
-  LiveActionButtonGroup,
-  LiveForumIndicator,
   LogoWrapper,
   IframeWrapper,
   LoginRightWrapper,
@@ -38,27 +35,28 @@ import {
   CardsWrapper,
 } from './style.js';
 
-export default function HomePage() {
+export default function HomePage({ isLoginOpen = false }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(isLoginOpen);
   const [openRegister, setRegisterOpen] = React.useState(false);
   const [openDemoVideo, setDemoVideo] = React.useState(false);
 
-  function handleDrawerToggle() {
+  const handleDrawerToggle = () => {
     setOpen(!open);
-  }
-  function handleRegistrationDrawerToggle() {
+  };
+  const handleRegistrationDrawerToggle = () => {
     setRegisterOpen(!openRegister);
-  }
-  function handleDemoVideDrawerToggle() {
+  };
+  const handleDemoVideDrawerToggle = () => {
     setDemoVideo(!openDemoVideo);
-  }
+  };
 
   return (
     <div>
       <AgendaDrawer />
       <IframeWrapper>
         <iframe
+          title="101"
           width="100%"
           height="100%"
           frameBorder="0"

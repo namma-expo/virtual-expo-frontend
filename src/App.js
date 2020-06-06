@@ -1,23 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import HomePage from 'components/HomePage';
-import ExhibitorDashboardPage from 'components/ExhibitorDashboard';
+import DashboardPage from 'components/ExhibitorDashboard';
+import { ProtectedRoute, NoUserRoute } from 'common/AppRouters';
+import { AuthProvider } from 'common/Authentication';
 
 export default function App() {
   return (
-    <Router>
-      <div>
-        <Switch>
-          <Route path="/exhibitor-dashboard">
-            <ExhibitorDashboardPage />
-          </Route>
-
-          {/* Home page should always be at the bottom */}
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div>
+          <Switch>
+            <NoUserRoute path="/" exact component={HomePage} />
+            <ProtectedRoute path="/dashboard" component={DashboardPage} />
+          </Switch>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
