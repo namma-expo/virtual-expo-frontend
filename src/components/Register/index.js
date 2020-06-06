@@ -103,7 +103,7 @@ export default function Register() {
                 </InputAdornment>
               ),
             }}
-            name="email"
+            name="emailID"
             inputRef={register({ required: true })}
           />
           <TextField
