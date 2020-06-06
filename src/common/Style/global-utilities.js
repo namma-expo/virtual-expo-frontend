@@ -5,6 +5,7 @@ export const breakPointXs = 320;
 export const breakPointSm = 768;
 export const breakPointMd = 1024;
 export const breakPointLg = 1200;
+export const breakpointXlg = 1500;
 export const breakPointMuiSm = 600;
 export const breakPointMuiMd = 960;
 

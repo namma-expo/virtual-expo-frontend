@@ -9,8 +9,6 @@ body {
   padding: 0px;
   margin: 0px;
   word-break: break-word;
-  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

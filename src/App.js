@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import HomePage from 'components/HomePage';
-import DashboardPage from 'components/Dashboard';
+import DashboardPage from 'components/ExhibitorDashboard';
 import { ProtectedRoute, NoUserRoute } from 'common/AppRouters';
 import { AuthProvider } from 'common/Authentication';
 
