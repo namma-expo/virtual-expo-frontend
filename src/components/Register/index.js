@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Button,
   TextField,
@@ -12,6 +12,8 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
+import { useForm, Controller } from 'react-hook-form';
+import { AuthContext } from 'common/Authentication/index.js';
 import {
   useStyles,
   DrawerWrapper,
@@ -23,46 +25,60 @@ import {
 
 export default function Register() {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState(true);
-  const [value, setValue] = React.useState('');
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
-  const handleRadioChange = (event) => {
-    setValue(event.target.value);
-  };
+  const { authUserSignUp } = useContext(AuthContext);
+  const { register, handleSubmit, control } = useForm();
+
   return (
-    <DrawerWrapper>
-      <DrawerTitle>Create an account</DrawerTitle>
-      <DrawerSubTitle>Sign up to continue</DrawerSubTitle>
-      <RadioGroup
-        row
-        aria-label="position"
-        name="position"
-        defaultValue="visitor"
-        className={classes.radioGroupStyle}
-        onChange={handleRadioChange}
-      >
-        <FormControlLabel
-          value="visitor"
-          control={<Radio color="primary" />}
-          label="Visitor"
-          labelPlacement="end"
+    <form
+      className={classes.formWrapper}
+      autoComplete="off"
+      onSubmit={handleSubmit(
+        ({ userName, password, emailID, phoneNumber, role }) => {
+          authUserSignUp({
+            userName,
+            password,
+            emailID,
+            phoneNumber,
+            role,
+          });
+        },
+      )}
+    >
+      <DrawerWrapper>
+        <DrawerTitle>Create an account</DrawerTitle>
+        <DrawerSubTitle>Sign up to continue</DrawerSubTitle>
+        <Controller
+          name="role"
+          control={control}
+          defaultValue="visitor"
+          as={
+            <RadioGroup
+              row
+              aria-label="position"
+              className={classes.radioGroupStyle}
+            >
+              <FormControlLabel
+                value="visitor"
+                control={<Radio color="primary" />}
+                label="Visitor"
+                labelPlacement="end"
+              />
+              <FormControlLabel
+                value="exhibitor"
+                control={<Radio color="primary" />}
+                label="Exhibitor"
+                labelPlacement="end"
+              />
+            </RadioGroup>
+          }
         />
-        <FormControlLabel
-          value="exhibitor"
-          control={<Radio color="primary" />}
-          label="Exhibitor"
-          labelPlacement="end"
-        />
-      </RadioGroup>
-      <form className={classes.formWrapper} noValidate autoComplete="off">
+
         <div>
           <TextField
             required
             id="standard-required"
             label="User Name"
-            placeholder="Madhukar"
+            // placeholder="Madhukar"
             fullWidth
             InputProps={{
               startAdornment: (
@@ -71,6 +87,8 @@ export default function Register() {
                 </InputAdornment>
               ),
             }}
+            name="userName"
+            inputRef={register({ required: true })}
           />
           <TextField
             required
@@ -85,6 +103,8 @@ export default function Register() {
                 </InputAdornment>
               ),
             }}
+            name="email"
+            inputRef={register({ required: true })}
           />
           <TextField
             required
@@ -100,6 +120,8 @@ export default function Register() {
                 </InputAdornment>
               ),
             }}
+            name="password"
+            inputRef={register({ required: true })}
           />
           <TextField
             required
@@ -116,34 +138,36 @@ export default function Register() {
                 </InputAdornment>
               ),
             }}
+            name="phoneNumber"
+            inputRef={register({ required: true })}
           />
         </div>
-      </form>
-      <TermsConditionLink>
-        <Checkbox
-          checked={checked}
-          onChange={handleChange}
-          inputProps={{ 'aria-label': 'primary checkbox' }}
-          className={classes.termsConditionCheckbox}
-        />
-        I agree to our<span></span>
-        <Button className={classes.registerLinkBtn}>
-          terms &amp; conditions
+        <TermsConditionLink>
+          <Checkbox
+            checked={true}
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+            className={classes.termsConditionCheckbox}
+          />
+          I agree to our
+          <Button className={classes.registerLinkBtn}>
+            terms &amp; conditions
+          </Button>
+        </TermsConditionLink>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          className={classes.drawerActionBtn}
+          disableElevation
+        >
+          Register Now
         </Button>
-      </TermsConditionLink>
-      <Button
-        fullWidth
-        variant="contained"
-        className={classes.drawerActionBtn}
-        disableElevation
-      >
-        Register Now
-      </Button>
 
-      <RegisterLink>
-        Already have an account <span></span>
-        <Button className={classes.registerLinkBtn}>Login</Button>
-      </RegisterLink>
-    </DrawerWrapper>
+        <RegisterLink>
+          Already have an account <span></span>
+          <Button className={classes.registerLinkBtn}>Login</Button>
+        </RegisterLink>
+      </DrawerWrapper>
+    </form>
   );
 }
