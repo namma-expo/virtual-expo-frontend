@@ -37,20 +37,25 @@ import {
 export default function DashboardNavBar(props) {
   const classes = useStyles();
   const [isDesktopDrawerOpen, setDesktopDrawerOpen] = React.useState(false);
-  const [openNestedNav, setNestedNavOpen] = React.useState(false);
+  const [openNestedNavLayout, setNestedNavLayoutOpen] = React.useState(false);
+  const [openNestedNavProfile, setNestedNavProfileOpen] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  function handleDesktopDrawerToggle() {
+  const handleDesktopDrawerToggle = () => {
     setDesktopDrawerOpen(!isDesktopDrawerOpen);
-  }
-
-  const handleNestedNavItemsClick = () => {
-    setNestedNavOpen(!openNestedNav);
   };
 
-  function handleMobileDrawerToggle() {
+  const handleNestedNavLayoutClick = () => {
+    setNestedNavLayoutOpen(!openNestedNavLayout);
+  };
+
+  const handleNestedNavProfileClick = () => {
+    setNestedNavProfileOpen(!openNestedNavProfile);
+  };
+
+  const handleMobileDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -96,14 +101,14 @@ export default function DashboardNavBar(props) {
             <List disablePadding>
               <ListItem
                 button
-                onClick={handleNestedNavItemsClick}
+                onClick={handleNestedNavLayoutClick}
                 className={classes.navItemStyle}
               >
                 <DashboardOutlinedIcon />
                 <ListItemText primary="Page Layouts" />
-                {openNestedNav ? <ExpandLess /> : <ExpandMore />}
+                {openNestedNavLayout ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
-              <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
+              <Collapse in={openNestedNavLayout} timeout="auto" unmountOnExit>
                 <List component="div" className={classes.nestedListWrapper}>
                   <ListItem button className={classes.nestedListItems}>
                     <ListItemText primary="Hero Section" />
@@ -144,14 +149,14 @@ export default function DashboardNavBar(props) {
               </ListItem>
               <ListItem
                 button
-                onClick={handleNestedNavItemsClick}
+                onClick={handleNestedNavProfileClick}
                 className={classes.navItemStyle}
               >
                 <AccountBoxOutlinedIcon />
                 <ListItemText primary="Profile" />
-                {openNestedNav ? <ExpandLess /> : <ExpandMore />}
+                {openNestedNavProfile ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
-              <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
+              <Collapse in={openNestedNavProfile} timeout="auto" unmountOnExit>
                 <List component="div" className={classes.nestedListWrapper}>
                   <ListItem button className={classes.nestedListItems}>
                     <ListItemText primary="Account" />
@@ -210,14 +215,14 @@ export default function DashboardNavBar(props) {
           <List disablePadding>
             <ListItem
               button
-              onClick={handleNestedNavItemsClick}
+              onClick={handleNestedNavLayoutClick}
               className={classes.navItemStyle}
             >
               <DashboardOutlinedIcon />
               <ListItemText primary="Page Layouts" />
-              {openNestedNav ? <ExpandLess /> : <ExpandMore />}
+              {openNestedNavLayout ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-            <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
+            <Collapse in={openNestedNavLayout} timeout="auto" unmountOnExit>
               <List component="div" className={classes.nestedListWrapper}>
                 <ListItem button className={classes.nestedListItems}>
                   <ListItemText primary="Hero Section" />
@@ -258,14 +263,14 @@ export default function DashboardNavBar(props) {
             </ListItem>
             <ListItem
               button
-              onClick={handleNestedNavItemsClick}
+              onClick={handleNestedNavProfileClick}
               className={classes.navItemStyle}
             >
               <AccountBoxOutlinedIcon />
               <ListItemText primary="Profile" />
-              {openNestedNav ? <ExpandLess /> : <ExpandMore />}
+              {openNestedNavProfile ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-            <Collapse in={openNestedNav} timeout="auto" unmountOnExit>
+            <Collapse in={openNestedNavProfile} timeout="auto" unmountOnExit>
               <List component="div" className={classes.nestedListWrapper}>
                 <ListItem button className={classes.nestedListItems}>
                   <ListItemText primary="Account" />
