@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   primaryLightText,
@@ -9,12 +9,6 @@ import {
   primaryIconColor,
 } from 'common/Style/global-color';
 import { snBreakpoint, breakPointMuiSm } from 'common/Style/global-utilities';
-
-const FlexAlignJustifyCenter = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 export const HamburgerMenuWrapper = styled.div`
   margin: 0px;

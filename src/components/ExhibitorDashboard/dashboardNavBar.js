@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import {
@@ -16,15 +15,9 @@ import {
 
 import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountBoxOutlinedIcon from '@material-ui/icons/AccountBoxOutlined';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
-import GroupAddOutlinedIcon from '@material-ui/icons/GroupAddOutlined';
-import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
-import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import FormatListBulletedOutlinedIcon from '@material-ui/icons/FormatListBulletedOutlined';
+import { NAVIGATION_ITEMS } from './navItems';
 import {
   useStyles,
   HamburgerMenuWrapper,
@@ -34,27 +27,28 @@ import {
   MobileNavDrawerItemsWrapper,
 } from './style';
 
-export default function DashboardNavBar(props) {
+export default function DashboardNavBar() {
   const classes = useStyles();
+  const navItems = NAVIGATION_ITEMS;
+  console.log(navItems);
   const [isDesktopDrawerOpen, setDesktopDrawerOpen] = React.useState(false);
-  const [openNestedNavLayout, setNestedNavLayoutOpen] = React.useState(false);
-  const [openNestedNavProfile, setNestedNavProfileOpen] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDesktopDrawerToggle = () => {
     setDesktopDrawerOpen(!isDesktopDrawerOpen);
   };
 
-  const handleNestedNavLayoutClick = () => {
-    setNestedNavLayoutOpen(!openNestedNavLayout);
-  };
-
-  const handleNestedNavProfileClick = () => {
-    setNestedNavProfileOpen(!openNestedNavProfile);
-  };
-
   const handleMobileDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const [nestedNavState, setNestedNavState] = React.useState(false);
+  const handleNestedNavClick = () => {
+    setNestedNavState(!nestedNavState);
+  };
+
+  const handleMenuItemClick = () => {
+    console.log('clicked');
   };
 
   return (
@@ -99,73 +93,57 @@ export default function DashboardNavBar(props) {
           </MobileNavDrawerHeader>
           <MobileNavDrawerItemsWrapper>
             <List disablePadding>
-              <ListItem
-                button
-                onClick={handleNestedNavLayoutClick}
-                className={classes.navItemStyle}
-              >
-                <DashboardOutlinedIcon />
-                <ListItemText primary="Page Layouts" />
-                {openNestedNavLayout ? <ExpandLess /> : <ExpandMore />}
-              </ListItem>
-              <Collapse in={openNestedNavLayout} timeout="auto" unmountOnExit>
-                <List component="div" className={classes.nestedListWrapper}>
-                  <ListItem button className={classes.nestedListItems}>
-                    <ListItemText primary="Hero Section" />
-                  </ListItem>
-                  <ListItem button className={classes.nestedListItems}>
-                    <ListItemText primary="Section 1" />
-                  </ListItem>
-                  <ListItem button className={classes.nestedListItems}>
-                    <ListItemText primary="Section 2" />
-                  </ListItem>
-                  <ListItem button className={classes.nestedListItems}>
-                    <ListItemText primary="Section 3" />
-                  </ListItem>
-                  <ListItem button className={classes.nestedListItems}>
-                    <ListItemText primary="Section 4" />
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItem button className={classes.navItemStyle}>
-                <GroupAddOutlinedIcon />
-                <ListItemText primary="Contacts" />
-              </ListItem>
-              <ListItem button className={classes.navItemStyle}>
-                <TextsmsOutlinedIcon />
-                <ListItemText primary="Chat" />
-              </ListItem>
-              <ListItem button className={classes.navItemStyle}>
-                <AttachMoneyIcon />
-                <ListItemText primary="Pricing" />
-              </ListItem>
-              <ListItem button className={classes.navItemStyle}>
-                <FormatListBulletedOutlinedIcon />
-                <ListItemText primary="Event Agenda" />
-              </ListItem>
-              <ListItem button className={classes.navItemStyle}>
-                <BarChartOutlinedIcon />
-                <ListItemText primary="Analytics" />
-              </ListItem>
-              <ListItem
-                button
-                onClick={handleNestedNavProfileClick}
-                className={classes.navItemStyle}
-              >
-                <AccountBoxOutlinedIcon />
-                <ListItemText primary="Profile" />
-                {openNestedNavProfile ? <ExpandLess /> : <ExpandMore />}
-              </ListItem>
-              <Collapse in={openNestedNavProfile} timeout="auto" unmountOnExit>
-                <List component="div" className={classes.nestedListWrapper}>
-                  <ListItem button className={classes.nestedListItems}>
-                    <ListItemText primary="Account" />
-                  </ListItem>
-                  <ListItem button className={classes.nestedListItems}>
-                    <ListItemText primary="Logout" />
-                  </ListItem>
-                </List>
-              </Collapse>
+              {navItems.map((item) => {
+                return (
+                  <React.Fragment>
+                    {item.subitems != null ? (
+                      <React.Fragment>
+                        <ListItem
+                          button
+                          key={item.id}
+                          onClick={handleNestedNavClick}
+                          className={classes.navItemStyle}
+                        >
+                          <item.icon />
+                          <ListItemText primary={item.title} />
+                          {nestedNavState[item.title] ? (
+                            <ExpandLess />
+                          ) : (
+                            <ExpandMore />
+                          )}
+                        </ListItem>
+                        <Collapse
+                          component="li"
+                          in={nestedNavState}
+                          timeout="auto"
+                          unmountOnExit
+                        >
+                          <List
+                            component="div"
+                            className={classes.nestedListWrapper}
+                          >
+                            {item.subitems.map((nestedItem) => {
+                              return (
+                                <ListItem
+                                  button
+                                  className={classes.nestedListItems}
+                                >
+                                  <ListItemText primary={nestedItem.title} />
+                                </ListItem>
+                              );
+                            })}
+                          </List>
+                        </Collapse>
+                      </React.Fragment>
+                    ) : (
+                      <ListItem button className={classes.navItemStyle}>
+                        <item.icon />
+                        <ListItemText primary={item.title} />
+                      </ListItem>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </List>
           </MobileNavDrawerItemsWrapper>
         </Drawer>
@@ -213,73 +191,61 @@ export default function DashboardNavBar(props) {
             )}
           </HamburgerMenuWrapper>
           <List disablePadding>
-            <ListItem
-              button
-              onClick={handleNestedNavLayoutClick}
-              className={classes.navItemStyle}
-            >
-              <DashboardOutlinedIcon />
-              <ListItemText primary="Page Layouts" />
-              {openNestedNavLayout ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={openNestedNavLayout} timeout="auto" unmountOnExit>
-              <List component="div" className={classes.nestedListWrapper}>
-                <ListItem button className={classes.nestedListItems}>
-                  <ListItemText primary="Hero Section" />
-                </ListItem>
-                <ListItem button className={classes.nestedListItems}>
-                  <ListItemText primary="Section 1" />
-                </ListItem>
-                <ListItem button className={classes.nestedListItems}>
-                  <ListItemText primary="Section 2" />
-                </ListItem>
-                <ListItem button className={classes.nestedListItems}>
-                  <ListItemText primary="Section 3" />
-                </ListItem>
-                <ListItem button className={classes.nestedListItems}>
-                  <ListItemText primary="Section 4" />
-                </ListItem>
-              </List>
-            </Collapse>
-            <ListItem button className={classes.navItemStyle}>
-              <GroupAddOutlinedIcon />
-              <ListItemText primary="Contacts" />
-            </ListItem>
-            <ListItem button className={classes.navItemStyle}>
-              <TextsmsOutlinedIcon />
-              <ListItemText primary="Chat" />
-            </ListItem>
-            <ListItem button className={classes.navItemStyle}>
-              <AttachMoneyIcon />
-              <ListItemText primary="Pricing" />
-            </ListItem>
-            <ListItem button className={classes.navItemStyle}>
-              <FormatListBulletedOutlinedIcon />
-              <ListItemText primary="Event Agenda" />
-            </ListItem>
-            <ListItem button className={classes.navItemStyle}>
-              <BarChartOutlinedIcon />
-              <ListItemText primary="Analytics" />
-            </ListItem>
-            <ListItem
-              button
-              onClick={handleNestedNavProfileClick}
-              className={classes.navItemStyle}
-            >
-              <AccountBoxOutlinedIcon />
-              <ListItemText primary="Profile" />
-              {openNestedNavProfile ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={openNestedNavProfile} timeout="auto" unmountOnExit>
-              <List component="div" className={classes.nestedListWrapper}>
-                <ListItem button className={classes.nestedListItems}>
-                  <ListItemText primary="Account" />
-                </ListItem>
-                <ListItem button className={classes.nestedListItems}>
-                  <ListItemText primary="Logout" />
-                </ListItem>
-              </List>
-            </Collapse>
+            {navItems.map((item) => {
+              return (
+                <React.Fragment>
+                  {item.subitems != null ? (
+                    <React.Fragment>
+                      <ListItem
+                        button
+                        onClick={handleNestedNavClick}
+                        className={classes.navItemStyle}
+                      >
+                        <item.icon />
+                        <ListItemText primary={item.title} />
+                        {nestedNavState[item.title] ? (
+                          <ExpandLess />
+                        ) : (
+                          <ExpandMore />
+                        )}
+                      </ListItem>
+                      <Collapse
+                        component="li"
+                        in={nestedNavState}
+                        timeout="auto"
+                        unmountOnExit
+                      >
+                        <List
+                          component="div"
+                          className={classes.nestedListWrapper}
+                        >
+                          {item.subitems.map((nestedItem) => {
+                            return (
+                              <ListItem
+                                button
+                                className={classes.nestedListItems}
+                              >
+                                <ListItemText primary={nestedItem.title} />
+                              </ListItem>
+                            );
+                          })}
+                        </List>
+                      </Collapse>
+                    </React.Fragment>
+                  ) : (
+                    <ListItem
+                      button={true}
+                      selected
+                      className={classes.navItemStyle}
+                      onClick={handleMenuItemClick()}
+                    >
+                      <item.icon />
+                      <ListItemText primary={item.title} />
+                    </ListItem>
+                  )}
+                </React.Fragment>
+              );
+            })}
           </List>
         </Drawer>
       </Hidden>
