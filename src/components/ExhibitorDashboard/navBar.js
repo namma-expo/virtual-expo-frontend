@@ -21,6 +21,7 @@ import {
   useStyles,
   HamburgerMenuWrapper,
   ProfileDetails,
+  NavBarItemsWrapper,
   HorizontalNavLinkWrapper,
   MobileNavDrawerHeader,
   MobileNavDrawerItemsWrapper,
@@ -174,7 +175,7 @@ export default function NavBar({ items = [], onMenuClick = () => {} }) {
           }}
           open={isDesktopDrawerOpen}
         >
-          <HamburgerMenuWrapper>
+          <HamburgerMenuWrapper isNavExpanded={isDesktopDrawerOpen}>
             <div>
               <IconButton
                 aria-label={
@@ -196,64 +197,68 @@ export default function NavBar({ items = [], onMenuClick = () => {} }) {
               </ProfileDetails>
             )}
           </HamburgerMenuWrapper>
-          <List disablePadding>
-            {items.map((item) => {
-              return (
-                <React.Fragment>
-                  {item.subitems != null ? (
-                    <React.Fragment>
+          <NavBarItemsWrapper>
+            <List disablePadding>
+              {items.map((item) => {
+                return (
+                  <React.Fragment>
+                    {item.subitems != null ? (
+                      <React.Fragment>
+                        <ListItem
+                          button
+                          onClick={handleNestedNavClick}
+                          className={classes.navItemStyle}
+                        >
+                          <item.icon />
+                          <ListItemText primary={item.title} />
+                          {nestedNavState[item.title] ? (
+                            <ExpandLess />
+                          ) : (
+                            <ExpandMore />
+                          )}
+                        </ListItem>
+                        <Collapse
+                          component="li"
+                          in={nestedNavState}
+                          timeout="auto"
+                          unmountOnExit
+                        >
+                          <List
+                            component="div"
+                            className={classes.nestedListWrapper}
+                          >
+                            {item.subitems.map((nestedItem) => {
+                              return (
+                                <ListItem
+                                  button
+                                  className={classes.nestedListItems}
+                                  onClick={() =>
+                                    handleMenuItemClick(nestedItem)
+                                  }
+                                >
+                                  <ListItemText primary={nestedItem.title} />
+                                </ListItem>
+                              );
+                            })}
+                          </List>
+                        </Collapse>
+                      </React.Fragment>
+                    ) : (
                       <ListItem
-                        button
-                        onClick={handleNestedNavClick}
+                        button={true}
+                        selected
                         className={classes.navItemStyle}
+                        onClick={() => handleMenuItemClick(item)}
                       >
                         <item.icon />
                         <ListItemText primary={item.title} />
-                        {nestedNavState[item.title] ? (
-                          <ExpandLess />
-                        ) : (
-                          <ExpandMore />
-                        )}
                       </ListItem>
-                      <Collapse
-                        component="li"
-                        in={nestedNavState}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        <List
-                          component="div"
-                          className={classes.nestedListWrapper}
-                        >
-                          {item.subitems.map((nestedItem) => {
-                            return (
-                              <ListItem
-                                button
-                                className={classes.nestedListItems}
-                                onClick={() => handleMenuItemClick(nestedItem)}
-                              >
-                                <ListItemText primary={nestedItem.title} />
-                              </ListItem>
-                            );
-                          })}
-                        </List>
-                      </Collapse>
-                    </React.Fragment>
-                  ) : (
-                    <ListItem
-                      button={true}
-                      selected
-                      className={classes.navItemStyle}
-                      onClick={() => handleMenuItemClick(item)}
-                    >
-                      <item.icon />
-                      <ListItemText primary={item.title} />
-                    </ListItem>
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </List>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </List>
+          </NavBarItemsWrapper>
         </Drawer>
       </Hidden>
     </React.Fragment>

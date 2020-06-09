@@ -3,18 +3,6 @@ import styled from 'styled-components';
 import { primaryLightText, primaryColor } from 'common/Style/global-color';
 import { primaryDarkColor } from 'common/Style/global-color';
 
-export const ExhibitorContactWrapper = styled.div`
-  padding: 0px;
-  margin: 0px auto;
-`;
-
-export const HeroHeadingWrapper = styled.div`
-  padding: 50px 50px;
-  color: ${primaryLightText};
-  font-size: 35px;
-  background-color: ${primaryColor};
-`;
-
 export const DialogContent = styled.div`
   padding: 25px 15px;
   > form {

@@ -6,6 +6,7 @@ import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import FormatListBulletedOutlinedIcon from '@material-ui/icons/FormatListBulletedOutlined';
 import Contacts from 'components/ExhibitorDashboard/Contacts';
+import ExhibitorLayoutTheme from 'components/ExhibitorDashboard/Theme';
 import Bleh from 'components/ExhibitorDashboard/Layouts';
 
 const MENU_ITEMS = {
@@ -17,7 +18,7 @@ const MENU_ITEMS = {
       {
         id: 'theme',
         title: 'Theme',
-        component: Bleh,
+        component: ExhibitorLayoutTheme,
       },
       {
         id: 'hero',

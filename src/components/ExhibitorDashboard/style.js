@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import {
+  primaryColor,
   primaryLightText,
   primaryLightColor,
   primaryBorderColor,
@@ -8,7 +9,11 @@ import {
   secondarySectionBackground,
   primaryIconColor,
 } from 'common/Style/global-color';
-import { snBreakpoint, breakPointMuiSm } from 'common/Style/global-utilities';
+import {
+  snBreakpoint,
+  breakPointMuiSm,
+  scrollBar,
+} from 'common/Style/global-utilities';
 
 export const HamburgerMenuWrapper = styled.div`
   margin: 0px;
@@ -33,6 +38,12 @@ export const HamburgerMenuWrapper = styled.div`
       padding: 12px;
       color: ${primaryLightText};
     }
+
+    ${(props) =>
+      props.isNavExpanded &&
+      css`
+        min-height: 145px;
+      `};
   }
 `;
 
@@ -47,6 +58,14 @@ export const ProfileDetails = styled.div`
   p {
     font-size: 14px;
   }
+`;
+
+export const NavBarItemsWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  ${scrollBar};
 `;
 
 export const HorizontalNavLinkWrapper = styled.div`
@@ -164,3 +183,17 @@ export const useStyles = makeStyles((theme) => ({
     padding: '0px',
   },
 }));
+
+//Dashboard common component
+
+export const ExhibitorContentWrapper = styled.div`
+  padding: 0px;
+  margin: 0px auto;
+`;
+
+export const HeroHeadingWrapper = styled.div`
+  padding: 50px 50px;
+  color: ${primaryLightText};
+  font-size: 35px;
+  background-color: ${primaryColor};
+`;

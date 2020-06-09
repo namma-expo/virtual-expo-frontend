@@ -17,12 +17,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import { muiTheme } from 'common/Style/mui-theme';
-import {
-  useStyles,
-  ExhibitorContactWrapper,
-  HeroHeadingWrapper,
-  DialogContent,
-} from './style';
+import { ExhibitorContentWrapper, HeroHeadingWrapper } from '../style';
+import { useStyles, DialogContent } from './style';
 
 function createData(name, email, phone, company, jobTitle) {
   return { name, email, phone, company, jobTitle };
@@ -76,7 +72,7 @@ export default function Contacts() {
 
   return (
     <ThemeProvider theme={muiTheme}>
-      <ExhibitorContactWrapper>
+      <ExhibitorContentWrapper>
         <HeroHeadingWrapper>Contacts</HeroHeadingWrapper>
         <TableContainer className={classes.tableContainerStyle}>
           <Table className={classes.table} aria-label="simple table">
@@ -148,7 +144,7 @@ export default function Contacts() {
             </form>
           </DialogContent>
         </Dialog>
-      </ExhibitorContactWrapper>
+      </ExhibitorContentWrapper>
     </ThemeProvider>
   );
 }
