@@ -66,7 +66,7 @@ const rows = [
   ),
 ];
 
-export default function ExhibitorContacts() {
+export default function Contacts() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 

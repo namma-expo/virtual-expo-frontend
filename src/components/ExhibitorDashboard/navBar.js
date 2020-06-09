@@ -17,7 +17,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { NAVIGATION_ITEMS } from './navItems';
 import {
   useStyles,
   HamburgerMenuWrapper,
@@ -27,12 +26,11 @@ import {
   MobileNavDrawerItemsWrapper,
 } from './style';
 
-export default function DashboardNavBar() {
+export default function NavBar({ items = [], onMenuClick = () => {} }) {
   const classes = useStyles();
-  const navItems = NAVIGATION_ITEMS;
-  console.log(navItems);
   const [isDesktopDrawerOpen, setDesktopDrawerOpen] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [nestedNavState, setNestedNavState] = React.useState(false);
 
   const handleDesktopDrawerToggle = () => {
     setDesktopDrawerOpen(!isDesktopDrawerOpen);
@@ -42,13 +40,14 @@ export default function DashboardNavBar() {
     setMobileOpen(!mobileOpen);
   };
 
-  const [nestedNavState, setNestedNavState] = React.useState(false);
   const handleNestedNavClick = () => {
+    setDesktopDrawerOpen(true);
     setNestedNavState(!nestedNavState);
   };
 
-  const handleMenuItemClick = () => {
-    console.log('clicked');
+  const handleMenuItemClick = (item) => {
+    setDesktopDrawerOpen(true);
+    onMenuClick(item);
   };
 
   return (
@@ -93,7 +92,7 @@ export default function DashboardNavBar() {
           </MobileNavDrawerHeader>
           <MobileNavDrawerItemsWrapper>
             <List disablePadding>
-              {navItems.map((item) => {
+              {items.map((item) => {
                 return (
                   <React.Fragment>
                     {item.subitems != null ? (
@@ -127,6 +126,9 @@ export default function DashboardNavBar() {
                                 <ListItem
                                   button
                                   className={classes.nestedListItems}
+                                  onClick={() =>
+                                    handleMenuItemClick(nestedItem)
+                                  }
                                 >
                                   <ListItemText primary={nestedItem.title} />
                                 </ListItem>
@@ -136,7 +138,11 @@ export default function DashboardNavBar() {
                         </Collapse>
                       </React.Fragment>
                     ) : (
-                      <ListItem button className={classes.navItemStyle}>
+                      <ListItem
+                        button
+                        className={classes.navItemStyle}
+                        onClick={() => handleMenuItemClick(item)}
+                      >
                         <item.icon />
                         <ListItemText primary={item.title} />
                       </ListItem>
@@ -191,7 +197,7 @@ export default function DashboardNavBar() {
             )}
           </HamburgerMenuWrapper>
           <List disablePadding>
-            {navItems.map((item) => {
+            {items.map((item) => {
               return (
                 <React.Fragment>
                   {item.subitems != null ? (
@@ -224,6 +230,7 @@ export default function DashboardNavBar() {
                               <ListItem
                                 button
                                 className={classes.nestedListItems}
+                                onClick={() => handleMenuItemClick(nestedItem)}
                               >
                                 <ListItemText primary={nestedItem.title} />
                               </ListItem>
@@ -237,7 +244,7 @@ export default function DashboardNavBar() {
                       button={true}
                       selected
                       className={classes.navItemStyle}
-                      onClick={handleMenuItemClick()}
+                      onClick={() => handleMenuItemClick(item)}
                     >
                       <item.icon />
                       <ListItemText primary={item.title} />

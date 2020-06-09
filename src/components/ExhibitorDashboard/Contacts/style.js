@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import { primaryLightText, primaryColor } from 'common/Style/global-color';
-import { primaryDarkColor } from '../../common/Style/global-color';
+import { primaryDarkColor } from 'common/Style/global-color';
 
 export const ExhibitorContactWrapper = styled.div`
   padding: 0px;
