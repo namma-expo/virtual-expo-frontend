@@ -5,52 +5,77 @@ import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import FormatListBulletedOutlinedIcon from '@material-ui/icons/FormatListBulletedOutlined';
+import Contacts from 'components/ExhibitorDashboard/Contacts';
+import Bleh from 'components/ExhibitorDashboard/Layouts';
 
 const MENU_ITEMS = {
   pageLayout: {
+    id: 'layout',
     title: 'Page Layout',
     icon: DashboardOutlinedIcon,
     subitems: [
       {
+        id: 'theme',
         title: 'Theme',
+        component: Bleh,
       },
       {
+        id: 'hero',
         title: 'Hero Section',
+        component: Bleh,
       },
       {
+        id: 'section1',
         title: 'Section 1',
+        component: Bleh,
       },
       {
+        id: 'section2',
         title: 'Section 2',
+        component: Bleh,
       },
       {
+        id: 'section3',
         title: 'Section 3',
+        component: Bleh,
       },
     ],
   },
   contacts: {
+    id: 'contacts',
     title: 'Contacts',
     icon: GroupAddOutlinedIcon,
+    component: Contacts,
   },
   chat: {
+    id: 'chat',
     title: 'Chat',
     icon: TextsmsOutlinedIcon,
+    component: Bleh,
   },
   pricing: {
+    id: 'pricing',
     title: 'Pricing',
     icon: AttachMoneyIcon,
+    component: Bleh,
   },
   eventAgenda: {
+    id: 'event',
     title: 'Event Agenda',
     icon: FormatListBulletedOutlinedIcon,
+    component: Bleh,
   },
   analytics: {
+    id: 'analytics',
     title: 'Analytics',
     icon: BarChartOutlinedIcon,
+    component: Bleh,
   },
   profile: {
+    id: 'profile',
     title: 'Profile',
     icon: AccountBoxOutlinedIcon,
+    component: Bleh,
   },
 };
 

@@ -1,13 +1,19 @@
 import React from 'react';
-import NavBar from './dashboardNavBar';
+import NavBar from './navBar';
 import { ExhibitorDashboardWrapper } from 'common/Style/global-style';
-import ExhibitorContacts from '../ExhibitorContacts';
+import { NAVIGATION_ITEMS } from './navItems';
 
 export default function DashboardPage() {
+  const [currentComponent, setCurrentComponent] = React.useState();
   return (
     <ExhibitorDashboardWrapper>
-      <NavBar />
-      <ExhibitorContacts />
+      <NavBar
+        items={NAVIGATION_ITEMS}
+        onMenuClick={(item) => {
+          setCurrentComponent(item);
+        }}
+      />
+      {currentComponent && <currentComponent.component {...currentComponent} />}
     </ExhibitorDashboardWrapper>
   );
 }
