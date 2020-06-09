@@ -25,6 +25,7 @@ export const isNotDesktopView = !(elementWidth >= breakPointMd);
 export const mobileOnly = !(elementWidth >= breakPointXsMax);
 
 export const scrollBar = css`
+  scroll-behavior: smooth;
   ::-webkit-scrollbar {
     -webkit-appearance: none;
   }
