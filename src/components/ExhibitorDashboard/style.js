@@ -113,6 +113,7 @@ export const useStyles = makeStyles((theme) => ({
     }),
     overflowX: 'hidden',
     width: '65px',
+    zIndex: '2200',
   },
   desktopDrawerWrapper: {
     overflow: 'hidden',
