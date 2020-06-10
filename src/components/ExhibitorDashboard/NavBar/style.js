@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  primaryColor,
   primaryLightText,
   primaryLightColor,
   primaryBorderColor,
@@ -104,6 +103,7 @@ export const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     boxShadow: '0 2px 20px 0 rgba(0, 0, 20, 0.15)',
+    zIndex: '2200',
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
@@ -112,6 +112,7 @@ export const useStyles = makeStyles((theme) => ({
     }),
     overflowX: 'hidden',
     width: '65px',
+    zIndex: '2200',
   },
   desktopDrawerWrapper: {
     overflow: 'hidden',
@@ -183,17 +184,3 @@ export const useStyles = makeStyles((theme) => ({
     padding: '0px',
   },
 }));
-
-//Dashboard common component
-
-export const ExhibitorContentWrapper = styled.div`
-  padding: 0px;
-  margin: 0px auto;
-`;
-
-export const HeroHeadingWrapper = styled.div`
-  padding: 50px 50px;
-  color: ${primaryLightText};
-  font-size: 35px;
-  background-color: ${primaryColor};
-`;
