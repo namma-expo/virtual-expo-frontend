@@ -1,5 +1,6 @@
 {
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.preferences.importModuleSpecifier": "non-relative",
+  "eslint.nodePath": "src",
   "eslint.alwaysShowStatus": true
 }
