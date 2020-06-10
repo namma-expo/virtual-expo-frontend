@@ -7,6 +7,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import FormatListBulletedOutlinedIcon from '@material-ui/icons/FormatListBulletedOutlined';
 import Contacts from 'components/ExhibitorDashboard/Contacts';
 import ExhibitorLayoutTheme from 'components/ExhibitorDashboard/Theme';
+import ExhibitorChatPage from 'components/ExhibitorDashboard/Chat';
 import Bleh from 'components/ExhibitorDashboard/Layouts';
 
 const MENU_ITEMS = {
@@ -52,7 +53,7 @@ const MENU_ITEMS = {
     id: 'chat',
     title: 'Chat',
     icon: TextsmsOutlinedIcon,
-    component: Bleh,
+    component: ExhibitorChatPage,
   },
   pricing: {
     id: 'pricing',
