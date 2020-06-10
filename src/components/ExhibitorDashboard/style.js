@@ -104,6 +104,7 @@ export const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     boxShadow: '0 2px 20px 0 rgba(0, 0, 20, 0.15)',
+    zIndex: '2200',
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
