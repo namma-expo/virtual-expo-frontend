@@ -2,9 +2,13 @@
 export const primaryColor = '#0481d4';
 export const primaryDarkColor = '#045991';
 export const primaryLightColor = '#f1f1f1';
-export const primaryDarkText = '#rgba(0, 0, 0, 0.85)';
+export const primaryDarkText = 'rgba(0, 0, 0, 0.85)';
+export const secondaryDarkText = 'rgba(0,0,0,.6)';
 export const primaryLightText = '#fff';
 export const primarySectionBackground = '#fff';
 export const secondarySectionBackground = '#f5f5f5';
 export const primaryIconColor = 'rgba(0, 0, 0, 0.75)';
 export const primaryBorderColor = '#c9c9c9';
+export const secondaryBorderColor = '#e3e3e3';
+export const primarySuccessColor = '#4caf50';
+export const primaryDangerColor = '#d40404';
