@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   scrollBar,
   breakPointLg,
