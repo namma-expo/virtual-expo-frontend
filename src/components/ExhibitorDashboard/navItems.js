@@ -8,6 +8,7 @@ import FormatListBulletedOutlinedIcon from '@material-ui/icons/FormatListBullete
 import Contacts from 'components/ExhibitorDashboard/Contacts';
 import ExhibitorLayoutTheme from 'components/ExhibitorDashboard/Theme';
 import ExhibitorChatPage from 'components/ExhibitorDashboard/Chat';
+import ExhibitorHeroSection from 'components/ExhibitorDashboard/HeroSection';
 import Bleh from 'components/ExhibitorDashboard/Layouts';
 
 const MENU_ITEMS = {
@@ -24,7 +25,7 @@ const MENU_ITEMS = {
       {
         id: 'hero',
         title: 'Hero Section',
-        component: Bleh,
+        component: ExhibitorHeroSection,
       },
       {
         id: 'section1',
