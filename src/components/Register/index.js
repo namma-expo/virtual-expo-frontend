@@ -14,6 +14,7 @@ import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import { useForm, Controller } from 'react-hook-form';
 import { AuthContext } from 'common/Authentication/index.js';
+import { USER_ROLES } from 'common/Authentication/constants.js';
 import {
   useStyles,
   DrawerWrapper,
@@ -50,7 +51,7 @@ export default function Register() {
         <Controller
           name="role"
           control={control}
-          defaultValue="visitor"
+          defaultValue={USER_ROLES.VISITOR}
           as={
             <RadioGroup
               row
@@ -58,13 +59,13 @@ export default function Register() {
               className={classes.radioGroupStyle}
             >
               <FormControlLabel
-                value="visitor"
+                value={USER_ROLES.VISITOR}
                 control={<Radio color="primary" />}
                 label="Visitor"
                 labelPlacement="end"
               />
               <FormControlLabel
-                value="exhibitor"
+                value={USER_ROLES.EXHIBITOR}
                 control={<Radio color="primary" />}
                 label="Exhibitor"
                 labelPlacement="end"
