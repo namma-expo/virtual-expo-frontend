@@ -37,18 +37,19 @@ export function useChatFeed({ userID, recepientID }) {
   const [chatFeed, setChatFeed] = useState([]);
   useEffect(() => {
     if (!db) {
-      return [];
+      setChatFeed([]);
+    } else {
+      db.ref('/channels/' + userID + '/' + recepientID).on(
+        'value',
+        (snapshot) => {
+          let chats = [];
+          snapshot.forEach((snap) => {
+            chats.push(snap.val());
+          });
+          setChatFeed(chats);
+        },
+      );
     }
-    db.ref('/channels/' + userID + '/' + recepientID).on(
-      'value',
-      (snapshot) => {
-        let chats = [];
-        snapshot.forEach((snap) => {
-          chats.push(snap.val());
-        });
-        setChatFeed(chats);
-      },
-    );
   }, [recepientID, userID]);
   return chatFeed;
 }
@@ -57,15 +58,16 @@ export function useChatRecents(userID) {
   const [chatRecents, setChatRecents] = useState([]);
   useEffect(() => {
     if (!db) {
-      return [];
-    }
-    db.ref('/recents/' + userID).on('value', (snapshot) => {
-      let chats = [];
-      snapshot.forEach((snap) => {
-        chats.push(snap.val());
+      setChatRecents([]);
+    } else {
+      db.ref('/recents/' + userID).on('value', (snapshot) => {
+        let chats = [];
+        snapshot.forEach((snap) => {
+          chats.push(snap.val());
+        });
+        setChatRecents(chats);
       });
-      setChatRecents(chats);
-    });
+    }
   }, [userID]);
   return chatRecents;
 }
