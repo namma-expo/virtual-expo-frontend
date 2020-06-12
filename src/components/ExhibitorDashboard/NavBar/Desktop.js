@@ -15,6 +15,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import { NavContext } from 'components/ExhibitorDashboard';
 import {
   useStyles,
   HamburgerMenuWrapper,
@@ -23,6 +24,7 @@ import {
 } from './style';
 
 export default function DesktopNavBar({ items = [], onMenuClick = () => {} }) {
+  const { setCurrentComponent } = React.useContext(NavContext);
   const classes = useStyles();
   const [isDesktopDrawerOpen, setDesktopDrawerOpen] = React.useState(false);
   const [nestedNavState, setNestedNavState] = React.useState(false);
@@ -39,7 +41,7 @@ export default function DesktopNavBar({ items = [], onMenuClick = () => {} }) {
 
   const handleMenuItemClick = (item) => {
     setDesktopDrawerOpen(false);
-    onMenuClick(item); // propagate the component change to parent
+    setCurrentComponent(item);
   };
 
   return (
