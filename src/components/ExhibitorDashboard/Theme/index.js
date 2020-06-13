@@ -1,46 +1,77 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
-import { Paper, TextField, Button } from '@material-ui/core';
+import { TextField, Button, Typography } from '@material-ui/core';
 import { muiTheme } from 'common/Style/mui-theme';
-import { ExhibitorContentWrapper, HeroHeadingWrapper } from '../style';
-import { useStyles, ThemeContentWrapper, StyledCard, StyledBox } from './style';
+import {
+  useCommonStyles,
+  ExhibitorContentWrapper,
+  HeroHeadingWrapper,
+  StyledFormCard,
+} from '../style';
+import { useStyles, ThemeContentWrapper, TemplateFormWrapper } from './style';
 
 export default function ExhibitorLayoutTheme(props) {
-  const classes = useStyles();
+  const classesHero = useStyles();
+  const classes = useCommonStyles();
   return (
     <ThemeProvider theme={muiTheme}>
       <ExhibitorContentWrapper>
         <HeroHeadingWrapper>{props.title}</HeroHeadingWrapper>
         <ThemeContentWrapper>
-          <Paper className={classes.rootPaperStyle}>
-            <StyledCard>
-              <StyledBox>Website URL :</StyledBox>
-              <StyledBox alignLeft>
-                <TextField
-                  variant="outlined"
-                  defaultValue="www.onlineexpo.com/nike"
-                />
-              </StyledBox>
-            </StyledCard>
+          <TemplateFormWrapper>
+            <StyledFormCard>
+              <Typography variant="body1" component="label">
+                Website URL : (www.onlineexpo.com/)
+              </Typography>
+              <TextField
+                variant="outlined"
+                placeholder="nike"
+                className={classes.textFieldStyle}
+              />
+            </StyledFormCard>
 
-            <StyledCard>
-              <StyledBox>Logo :</StyledBox>
-              <StyledBox alignLeft>
-                <TextField type="file" variant="outlined" />
-              </StyledBox>
-            </StyledCard>
-            <StyledCard>
-              <StyledBox>Primary Color :</StyledBox>
-              <StyledBox alignLeft>
-                <TextField type="color" value="#035996" variant="outlined" />
-              </StyledBox>
-            </StyledCard>
-            <StyledCard>
-              <StyledBox>Button Color :</StyledBox>
-              <StyledBox alignLeft>
-                <TextField type="color" value="#3a6a8c" variant="outlined" />
-              </StyledBox>
-            </StyledCard>
+            <StyledFormCard>
+              <Typography variant="body1" component="label">
+                Logo
+              </Typography>
+              <TextField type="file" variant="outlined" />
+            </StyledFormCard>
+
+            <StyledFormCard>
+              <Typography variant="body1" component="label">
+                Primary Color
+              </Typography>
+              <TextField
+                type="color"
+                value="#035996"
+                variant="outlined"
+                className={classesHero.colorFieldStyle}
+              />
+            </StyledFormCard>
+            <StyledFormCard>
+              <Typography variant="body1" component="label">
+                Secondary Color
+              </Typography>
+              <TextField
+                type="color"
+                value="#035996"
+                variant="outlined"
+                className={classesHero.colorFieldStyle}
+              />
+            </StyledFormCard>
+
+            <StyledFormCard>
+              <Typography variant="body1" component="label">
+                Button Color
+              </Typography>
+              <TextField
+                type="color"
+                value="#3a6a8c"
+                variant="outlined"
+                className={classesHero.colorFieldStyle}
+              />
+            </StyledFormCard>
+
             <Button
               variant="contained"
               color="primary"
@@ -49,7 +80,7 @@ export default function ExhibitorLayoutTheme(props) {
             >
               Submit
             </Button>
-          </Paper>
+          </TemplateFormWrapper>
         </ThemeContentWrapper>
       </ExhibitorContentWrapper>
     </ThemeProvider>
