@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import _ from 'lodash';
 import {
   Button,
   TextField,
@@ -26,7 +27,7 @@ import {
 
 export default function Register() {
   const classes = useStyles();
-  const { authUserSignUp } = useContext(AuthContext);
+  const { authContext, authUserSignUp } = useContext(AuthContext);
   const { register, handleSubmit, control } = useForm();
 
   return (
@@ -46,6 +47,7 @@ export default function Register() {
       )}
     >
       <DrawerWrapper>
+        <p>{_.get(authContext, ['error', 'errorCode'], '')}</p>
         <DrawerTitle>Create an account</DrawerTitle>
         <DrawerSubTitle>Sign up to continue</DrawerSubTitle>
         <Controller

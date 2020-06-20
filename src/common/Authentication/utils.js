@@ -33,14 +33,12 @@ export async function signUp({
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userName: userName,
-        password: password,
         email: emailID,
-        contactNumber: phoneNumber,
+        name: userName,
+        password: password,
         role: role,
       }),
     });
-    console.log(response.status);
     const result = await response.json();
     return result;
   } catch (error) {

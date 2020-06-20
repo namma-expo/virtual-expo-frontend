@@ -5,6 +5,9 @@ import {
   USER_SIGNIN_SUCCESS,
   USER_SIGNIN_FAILED,
   USER_SIGNOUT_SUCCESS,
+  NETWORK_ISSUES,
+  USER_REGISTRATION_SUCCESS,
+  USER_REGISTRATION_FAILED,
 } from 'common/Authentication/constants';
 import authReducer, { initialAuthState } from 'common/Authentication/reducer';
 
@@ -26,6 +29,12 @@ export const AuthProvider = ({ children }) => {
 
   const authUserSignIn = async ({ userName, password }) => {
     const result = await signIn(userName, password);
+    if (!result) {
+      dispatch({
+        type: NETWORK_ISSUES,
+      });
+    }
+
     if (result.token) {
       console.log('here success');
       //TODO : Replace localstorage with http only cookies
@@ -57,7 +66,25 @@ export const AuthProvider = ({ children }) => {
       phoneNumber,
       role,
     });
-    console.log(result, 'user signed up successfully');
+    if (!result) {
+      dispatch({
+        type: NETWORK_ISSUES,
+      });
+    }
+
+    if (result.token) {
+      //TODO : Replace localstorage with http only cookies
+      localStorage.setItem(AUTH_TOKEN_NAME, result.token);
+      dispatch({
+        type: USER_REGISTRATION_SUCCESS,
+        authToken: result.token,
+      });
+    } else {
+      dispatch({
+        type: USER_REGISTRATION_FAILED,
+        error: result,
+      });
+    }
   };
 
   const authUserSignOut = () => {
