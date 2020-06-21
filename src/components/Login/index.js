@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import _ from 'lodash';
 import { Button, TextField, InputAdornment } from '@material-ui/core';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -14,8 +15,8 @@ import {
 
 export default function Login() {
   const classes = useStyles();
-  const { authUserSignIn } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
+  const { authContext, authUserSignIn } = useContext(AuthContext);
   return (
     <form
       className={classes.formWrapper}
@@ -25,6 +26,7 @@ export default function Login() {
       })}
     >
       <DrawerWrapper>
+        <p>{_.get(authContext, ['error', 'errorCode'], '')}</p>
         <DrawerTitle>Welcome Back</DrawerTitle>
         <DrawerSubTitle>Sign in to continue</DrawerSubTitle>
         <div>
