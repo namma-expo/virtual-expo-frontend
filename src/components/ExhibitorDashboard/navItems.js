@@ -9,6 +9,7 @@ import Contacts from 'components/ExhibitorDashboard/Contacts';
 import ExhibitorLayoutTheme from 'components/ExhibitorDashboard/Theme';
 import ExhibitorChatPage from 'components/ExhibitorDashboard/Chat';
 import ExhibitorHeroSection from 'components/ExhibitorDashboard/HeroSection';
+import ExhibitorSection1 from 'components/ExhibitorDashboard/SectionOne';
 import Bleh from 'components/ExhibitorDashboard/Layouts';
 
 const MENU_ITEMS = {
@@ -30,7 +31,7 @@ const MENU_ITEMS = {
       {
         id: 'section1',
         title: 'Section 1',
-        component: Bleh,
+        component: ExhibitorSection1,
       },
       {
         id: 'section2',
