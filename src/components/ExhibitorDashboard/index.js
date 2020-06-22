@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 import NavBar from './NavBar';
 import { ExhibitorDashboardWrapper } from 'common/Style/global-style';
-import { NAVIGATION_ITEMS, ROUTE_ITEMS } from './navItems';
+import { NAVIGATION_ITEMS, ROUTE_ITEMS, MENU_ITEMS } from './navItems';
 import { Button } from '@material-ui/core';
 import { AuthContext } from 'common/Authentication';
 import {
@@ -25,9 +25,10 @@ function DashboardRouter() {
         <NavBar items={NAVIGATION_ITEMS} />
         <Switch>
           {ROUTE_ITEMS.map((item, i) => {
-            if (item.id === 'profile') {
+            if (item.id === MENU_ITEMS.profile.id) {
               return (
                 <Route
+                  exact
                   path={item.path}
                   render={(props) => <item.component {...props} />}
                 />
@@ -35,10 +36,11 @@ function DashboardRouter() {
             } else {
               return (
                 <Route
+                  exact
                   path={item.path}
                   render={(props) =>
                     _.isEmpty(exhibitionDetails) ? (
-                      <Redirect to="/dashboard/profile" />
+                      <Redirect to={MENU_ITEMS.profile.path} exact />
                     ) : (
                       <item.component {...props} />
                     )

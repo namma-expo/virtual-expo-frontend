@@ -95,7 +95,7 @@ const MENU_ITEMS = {
     id: 'profile',
     title: 'Profile',
     icon: AccountBoxOutlinedIcon,
-    path: `${DASHBOARD_BASE_URL}/profile`,
+    path: `${DASHBOARD_BASE_URL}`,
     component: Profile,
   },
 };
@@ -121,4 +121,4 @@ const ROUTE_ITEMS = [
   ...MENU_ITEMS.pageLayout.subitems,
 ];
 
-export { NAVIGATION_ITEMS, ROUTE_ITEMS };
+export { NAVIGATION_ITEMS, ROUTE_ITEMS, MENU_ITEMS };
