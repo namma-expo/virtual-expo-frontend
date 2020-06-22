@@ -6,15 +6,12 @@ export async function fetchAllContacts() {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${authToken}`,
   };
-  console.log(headers);
   try {
     const response = await fetch(CONTACTS_URLS.ALL_CONTACTS, {
       method: 'GET',
       headers: headers,
     });
-    const result = await response.json();
-    console.log(result);
-    return result;
+    return response;
   } catch (error) {
     console.error(error);
   }
@@ -48,7 +45,6 @@ export async function createNewContact({
       }),
     });
     const result = await response.json();
-    console.log(result);
     return result;
   } catch (error) {
     console.error(error);

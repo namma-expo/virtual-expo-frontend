@@ -34,8 +34,9 @@ export default function Contacts() {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await fetchAllContacts();
-      if (result) {
+      const response = await fetchAllContacts();
+      if (response.status === 200) {
+        const result = await response.json();
         setContacts(result);
       }
     }
