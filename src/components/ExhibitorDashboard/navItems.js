@@ -10,6 +10,7 @@ import ExhibitorLayoutTheme from 'components/ExhibitorDashboard/Theme';
 import ExhibitorChatPage from 'components/ExhibitorDashboard/Chat';
 import ExhibitorHeroSection from 'components/ExhibitorDashboard/HeroSection';
 import ExhibitorSection1 from 'components/ExhibitorDashboard/SectionOne';
+import Profile from 'components/ExhibitorDashboard/Profile';
 import Bleh from 'components/ExhibitorDashboard/Layouts';
 
 const MENU_ITEMS = {
@@ -79,7 +80,7 @@ const MENU_ITEMS = {
     id: 'profile',
     title: 'Profile',
     icon: AccountBoxOutlinedIcon,
-    component: Bleh,
+    component: Profile,
   },
 };
 
