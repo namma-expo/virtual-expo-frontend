@@ -13,73 +13,89 @@ import ExhibitorSection1 from 'components/ExhibitorDashboard/SectionOne';
 import Profile from 'components/ExhibitorDashboard/Profile';
 import Bleh from 'components/ExhibitorDashboard/Layouts';
 
+const DASHBOARD_BASE_URL = '/dashboard';
+
+const PAGE_LAYOUT_SUBITEMS = [
+  {
+    id: 'theme',
+    title: 'Theme',
+    component: ExhibitorLayoutTheme,
+    path: `${DASHBOARD_BASE_URL}/theme`,
+  },
+  {
+    id: 'hero',
+    title: 'Hero Section',
+    component: ExhibitorHeroSection,
+    path: `${DASHBOARD_BASE_URL}/hero`,
+  },
+  {
+    id: 'section1',
+    title: 'Section 1',
+    component: ExhibitorSection1,
+    path: `${DASHBOARD_BASE_URL}/section1`,
+  },
+  {
+    id: 'section2',
+    title: 'Section 2',
+    component: Bleh,
+    path: `${DASHBOARD_BASE_URL}/section2`,
+  },
+  {
+    id: 'section3',
+    title: 'Section 3',
+    component: Bleh,
+    path: `${DASHBOARD_BASE_URL}/section3`,
+  },
+];
+
 const MENU_ITEMS = {
   pageLayout: {
     id: 'layout',
     title: 'Page Layout',
     icon: DashboardOutlinedIcon,
-    subitems: [
-      {
-        id: 'theme',
-        title: 'Theme',
-        component: ExhibitorLayoutTheme,
-      },
-      {
-        id: 'hero',
-        title: 'Hero Section',
-        component: ExhibitorHeroSection,
-      },
-      {
-        id: 'section1',
-        title: 'Section 1',
-        component: ExhibitorSection1,
-      },
-      {
-        id: 'section2',
-        title: 'Section 2',
-        component: Bleh,
-      },
-      {
-        id: 'section3',
-        title: 'Section 3',
-        component: Bleh,
-      },
-    ],
+    path: `${DASHBOARD_BASE_URL}/layout`,
+    subitems: PAGE_LAYOUT_SUBITEMS,
   },
   contacts: {
     id: 'contacts',
     title: 'Contacts',
     icon: GroupAddOutlinedIcon,
     component: Contacts,
+    path: `${DASHBOARD_BASE_URL}/contacts`,
   },
   chat: {
     id: 'chat',
     title: 'Chat',
     icon: TextsmsOutlinedIcon,
     component: ExhibitorChatPage,
+    path: `${DASHBOARD_BASE_URL}/chat`,
   },
   pricing: {
     id: 'pricing',
     title: 'Pricing',
     icon: AttachMoneyIcon,
     component: Bleh,
+    path: `${DASHBOARD_BASE_URL}/pricing`,
   },
   eventAgenda: {
     id: 'event',
     title: 'Event Agenda',
     icon: FormatListBulletedOutlinedIcon,
     component: Bleh,
+    path: `${DASHBOARD_BASE_URL}/event`,
   },
   analytics: {
     id: 'analytics',
     title: 'Analytics',
     icon: BarChartOutlinedIcon,
     component: Bleh,
+    path: `${DASHBOARD_BASE_URL}/analytics`,
   },
   profile: {
     id: 'profile',
     title: 'Profile',
     icon: AccountBoxOutlinedIcon,
+    path: `${DASHBOARD_BASE_URL}/profile`,
     component: Profile,
   },
 };
@@ -94,4 +110,15 @@ const NAVIGATION_ITEMS = [
   MENU_ITEMS.profile,
 ];
 
-export { NAVIGATION_ITEMS };
+const ROUTE_ITEMS = [
+  MENU_ITEMS.pageLayout,
+  MENU_ITEMS.contacts,
+  MENU_ITEMS.chat,
+  MENU_ITEMS.pricing,
+  MENU_ITEMS.eventAgenda,
+  MENU_ITEMS.analytics,
+  MENU_ITEMS.profile,
+  ...MENU_ITEMS.pageLayout.subitems,
+];
+
+export { NAVIGATION_ITEMS, ROUTE_ITEMS };

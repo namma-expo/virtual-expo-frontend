@@ -26,7 +26,7 @@ export default function Login() {
       })}
     >
       <DrawerWrapper>
-        <p>{_.get(authContext, ['error', 'errorCode'], '')}</p>
+        <p>{_.get(authContext, ['error', 'message'], '')}</p>
         <DrawerTitle>Welcome Back</DrawerTitle>
         <DrawerSubTitle>Sign in to continue</DrawerSubTitle>
         <div>

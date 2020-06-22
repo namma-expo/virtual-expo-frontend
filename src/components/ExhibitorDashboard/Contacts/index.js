@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 import {
   Table,
@@ -17,58 +17,31 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import { muiTheme } from 'common/Style/mui-theme';
+import { useForm } from 'react-hook-form';
+import { fetchAllContacts, createNewContact } from './service';
 import { ExhibitorContentWrapper, HeroHeadingWrapper } from '../style';
 import { useStyles, DialogContent } from './style';
-
-function createData(name, email, phone, company, jobTitle) {
-  return { name, email, phone, company, jobTitle };
-}
-
-const rows = [
-  createData(
-    'Nagraj',
-    'nagraj@gmail.com',
-    9988774455,
-    'sensibull',
-    'Full stack developer',
-  ),
-  createData(
-    'Madhukar',
-    'madhukar@gmail.com',
-    9988774455,
-    'sensibull',
-    'UI developer',
-  ),
-  createData(
-    'Siddesh',
-    'siddesh@gmail.com',
-    9988774455,
-    'Matrix',
-    'Backend developer',
-  ),
-  createData(
-    'Basavesh',
-    'basavesh@gmail.com',
-    9988774455,
-    'Matrix',
-    'Backend developer',
-  ),
-  createData(
-    'Manoj',
-    'manoj@gmail.com',
-    9988774455,
-    'Infosys',
-    'Full stack developer',
-  ),
-];
 
 export default function Contacts() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [contacts, setContacts] = React.useState([]);
+  const { register, handleSubmit, reset } = useForm();
 
   const handleDrawerToggle = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetchAllContacts();
+      if (response.status === 200) {
+        const result = await response.json();
+        setContacts(result);
+      }
+    }
+    fetchData();
+  }, [setContacts]);
 
   return (
     <ThemeProvider theme={muiTheme}>
@@ -87,13 +60,13 @@ export default function Contacts() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {contacts.map((row) => (
                 <TableRow key={row.name}>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.phone}</TableCell>
+                  <TableCell>{row.phone1}</TableCell>
                   <TableCell>{row.company}</TableCell>
-                  <TableCell>{row.jobTitle}</TableCell>
+                  <TableCell>{row.occupation}</TableCell>
                   <TableCell>
                     <IconButton>
                       <EditIcon />
@@ -121,19 +94,80 @@ export default function Contacts() {
         >
           <DialogTitle id="simple-dialog-title">Add New Contact</DialogTitle>
           <DialogContent>
-            <form>
-              <TextField label="Name" variant="outlined" />
+            <form
+              onSubmit={handleSubmit(
+                ({
+                  company,
+                  email,
+                  name,
+                  notes,
+                  occupation,
+                  phone1,
+                  phone2,
+                }) => {
+                  createNewContact({
+                    company,
+                    email,
+                    name,
+                    notes,
+                    occupation,
+                    phone1,
+                    phone2,
+                  });
+                  // reset();
+                },
+              )}
+            >
+              <TextField
+                label="Name"
+                variant="outlined"
+                inputRef={register}
+                name="name"
+              />
               <TextField
                 error
                 label="Email"
                 variant="outlined"
                 helperText="Incorrect entry."
+                inputRef={register}
+                name="email"
               />
-              <TextField label="Phone" variant="outlined" type="number" />
-              <TextField label="Company" variant="outlined" />
-              <TextField label="Job Title" variant="outlined" />
-              <TextField label="Notes" variant="outlined" multiline rows={4} />
+              <TextField
+                label="Phone"
+                variant="outlined"
+                type="number"
+                inputRef={register}
+                name="phone1"
+              />
+              <TextField
+                label="Phone"
+                variant="outlined"
+                type="number"
+                inputRef={register}
+                name="phone2"
+              />
+              <TextField
+                label="Company"
+                variant="outlined"
+                inputRef={register}
+                name="company"
+              />
+              <TextField
+                label="Job Title"
+                variant="outlined"
+                inputRef={register}
+                name="occupation"
+              />
+              <TextField
+                label="Notes"
+                variant="outlined"
+                multiline
+                rows={4}
+                inputRef={register}
+                name="notes"
+              />
               <Button
+                type="submit"
                 variant="contained"
                 color="primary"
                 disableElevation

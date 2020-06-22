@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { signIn, signUp } from 'common/Authentication/utils';
+import { signIn, signUp } from 'common/Authentication/service';
 import {
   AUTH_TOKEN_NAME,
   USER_SIGNIN_SUCCESS,
@@ -15,7 +15,6 @@ export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authContext, dispatch] = useReducer(authReducer, initialAuthState);
-  console.log(authContext);
 
   React.useEffect(() => {
     const authToken = localStorage.getItem(AUTH_TOKEN_NAME);
@@ -36,7 +35,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     if (result.token) {
-      console.log('here success');
       //TODO : Replace localstorage with http only cookies
       localStorage.setItem(AUTH_TOKEN_NAME, result.token);
       dispatch({
@@ -44,7 +42,6 @@ export const AuthProvider = ({ children }) => {
         authToken: result.token,
       });
     } else {
-      console.log('here failed');
       dispatch({
         type: USER_SIGNIN_FAILED,
         error: result,

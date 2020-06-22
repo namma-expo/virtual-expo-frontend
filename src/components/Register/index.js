@@ -47,7 +47,7 @@ export default function Register() {
       )}
     >
       <DrawerWrapper>
-        <p>{_.get(authContext, ['error', 'errorCode'], '')}</p>
+        <p>{_.get(authContext, ['error', 'message'], '')}</p>
         <DrawerTitle>Create an account</DrawerTitle>
         <DrawerSubTitle>Sign up to continue</DrawerSubTitle>
         <Controller

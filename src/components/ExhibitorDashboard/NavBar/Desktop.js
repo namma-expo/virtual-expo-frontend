@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import {
   Drawer,
@@ -15,7 +15,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { NavContext } from 'components/ExhibitorDashboard';
 import {
   useStyles,
   HamburgerMenuWrapper,
@@ -24,8 +23,8 @@ import {
 } from './style';
 
 export default function DesktopNavBar({ items = [], onMenuClick = () => {} }) {
-  const { setCurrentComponent } = React.useContext(NavContext);
   const classes = useStyles();
+  const history = useHistory();
   const [isDesktopDrawerOpen, setDesktopDrawerOpen] = React.useState(false);
   const [nestedNavState, setNestedNavState] = React.useState(false);
 
@@ -41,7 +40,7 @@ export default function DesktopNavBar({ items = [], onMenuClick = () => {} }) {
 
   const handleMenuItemClick = (item) => {
     setDesktopDrawerOpen(false);
-    setCurrentComponent(item);
+    history.push(item.path);
   };
 
   return (
