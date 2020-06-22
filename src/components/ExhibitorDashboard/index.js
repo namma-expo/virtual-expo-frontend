@@ -9,7 +9,7 @@ export const NavContext = React.createContext();
 
 export default function DashboardPage() {
   const [currentComponent, setCurrentComponent] = React.useState(
-    NAVIGATION_ITEMS[2],
+    NAVIGATION_ITEMS[6],
   );
   const { authUserSignOut } = useContext(AuthContext);
   return (
