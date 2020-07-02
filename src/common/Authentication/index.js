@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import jwt_decode from 'jwt-decode';
 import { signIn, signUp } from 'common/Authentication/service';
 import {
   AUTH_TOKEN_NAME,
@@ -19,10 +20,20 @@ export const AuthProvider = ({ children }) => {
   React.useEffect(() => {
     const authToken = localStorage.getItem(AUTH_TOKEN_NAME);
     if (authToken) {
-      dispatch({
-        type: USER_SIGNIN_SUCCESS,
-        authToken: authToken,
-      });
+      const decodedToken = jwt_decode(authToken);
+      const current_time = Date.now() / 1000;
+      if (decodedToken.exp < current_time) {
+        /* Token expired */
+        localStorage.removeItem(AUTH_TOKEN_NAME);
+        dispatch({
+          type: USER_SIGNOUT_SUCCESS,
+        });
+      } else {
+        dispatch({
+          type: USER_SIGNIN_SUCCESS,
+          authToken: authToken,
+        });
+      }
     }
   }, []);
 
